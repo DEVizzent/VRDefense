@@ -1,0 +1,113 @@
+[gd_scene load_steps=9 format=3 uid="uid://bdgeptrlnytvr"]
+
+[ext_resource type="Script" path="res://scenes/elements/Enemies/enemy.gd" id="1_4kqo0"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rpttg"]
+radius = 1.0
+height = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ahexw"]
+no_depth_test = true
+shading_mode = 0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uvqvs"]
+radius = 1.0
+height = 3.0
+
+[sub_resource type="Animation" id="Animation_l422u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshImpact:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_s7v5y"]
+resource_name = "death"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshImpact:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_50s3r"]
+resource_name = "impact"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshImpact:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_srmqj"]
+_data = {
+"RESET": SubResource("Animation_l422u"),
+"death": SubResource("Animation_s7v5y"),
+"impact": SubResource("Animation_50s3r")
+}
+
+[node name="Enemy" type="PathFollow3D"]
+loop = false
+script = ExtResource("1_4kqo0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("CapsuleMesh_rpttg")
+
+[node name="MeshImpact" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_rpttg")
+surface_material_override/0 = SubResource("StandardMaterial3D_ahexw")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_uvqvs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_srmqj")
+}

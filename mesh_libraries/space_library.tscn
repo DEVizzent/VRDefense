@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://xl5vausls488"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sl8kn"]
+albedo_color = Color(0.0627451, 0.603922, 0.152941, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d8n5t"]
+material = SubResource("StandardMaterial3D_sl8kn")
+size = Vector3(4, 0.1, 4)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xdj1w"]
+points = PackedVector3Array(-2.03175, -0.0817274, -2.03175, 2.03173, 0.108712, 2.03175, 2.03173, -0.0817274, 2.03175, 2.03173, 0.108712, -2.03175, -2.03175, 0.108712, 2.03175, -2.03175, -0.0817274, 2.03175, 2.03173, -0.0817274, -2.03175, -2.03175, 0.108712, -2.03175)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5p7jq"]
+albedo_color = Color(0.665976, 0.530193, 0.282315, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pl5pi"]
+material = SubResource("StandardMaterial3D_5p7jq")
+size = Vector3(4, 0.1, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mb1y"]
+albedo_color = Color(1.02278e-07, 0.230008, 0.0138344, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_b6iwu"]
+material = SubResource("StandardMaterial3D_4mb1y")
+size = Vector3(4, 0.1, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f3pmt"]
+albedo_color = Color(1, 1, 0.0235294, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hwemf"]
+material = SubResource("StandardMaterial3D_f3pmt")
+size = Vector3(4, 0.1, 4)
+
+[node name="SpaceLibrary" type="Node3D"]
+
+[node name="FreeSpace" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_d8n5t")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="FreeSpace"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FreeSpace/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_xdj1w")
+
+[node name="PathSpace" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_pl5pi")
+skeleton = NodePath("../FreeSpace")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="PathSpace"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PathSpace/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_xdj1w")
+
+[node name="BuiltSpace" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_b6iwu")
+skeleton = NodePath("../FreeSpace")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BuiltSpace"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuiltSpace/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_xdj1w")
+
+[node name="SelectedSpace" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_hwemf")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SelectedSpace"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectedSpace/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_xdj1w")
