@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://nxmhdco3ykew"]
+
+[ext_resource type="Script" path="res://scenes/elements/Turrets/turret_bow.gd" id="1_qxkx7"]
+[ext_resource type="PackedScene" uid="uid://du6lks8hw2dpn" path="res://scenes/elements/Projectile/arrow.tscn" id="2_7xkqe"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3hnd6"]
+radius = 10.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mgq5m"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 1.0
+
+[node name="Turret" type="Area3D"]
+collision_mask = 32
+script = ExtResource("1_qxkx7")
+projectile_scene = ExtResource("2_7xkqe")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_3hnd6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_mgq5m")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

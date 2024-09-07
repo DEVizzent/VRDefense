@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bn34dj2nc3rma"]
+[gd_scene load_steps=9 format=3 uid="uid://bn34dj2nc3rma"]
 
 [ext_resource type="MeshLibrary" uid="uid://bgknys2lv5gps" path="res://mesh_libraries/SpaceLibrary.tres" id="1_fd5sv"]
 [ext_resource type="Script" path="res://nodes/xr_pointable_grid_map.gd" id="2_4mdv7"]
 [ext_resource type="PackedScene" uid="uid://bdgeptrlnytvr" path="res://scenes/elements/Enemies/enemy.tscn" id="2_331ep"]
 [ext_resource type="PackedScene" uid="uid://br6uco4m0pijp" path="res://scenes/elements/base.tscn" id="3_gggr7"]
+[ext_resource type="Script" path="res://scenes/elements/Enemies/spawner_path_3d.gd" id="4_bbtev"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ahee"]
 albedo_color = Color(0.172549, 0.690196, 0.2, 1)
@@ -41,10 +42,12 @@ script = ExtResource("2_4mdv7")
 [node name="Base" parent="." instance=ExtResource("3_gggr7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 10.6493)
 
-[node name="Path3D" type="Path3D" parent="."]
+[node name="SpawnerPath3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_o7ued")
+script = ExtResource("4_bbtev")
+enemy_scene = ExtResource("2_331ep")
 
-[node name="Road" type="CSGPolygon3D" parent="Path3D"]
+[node name="Road" type="CSGPolygon3D" parent="SpawnerPath3D"]
 polygon = PackedVector2Array(-0.5, 0, -0.5, 0.1, 1.5, 0.1, 1.5, 0)
 mode = 2
 path_node = NodePath("..")
@@ -57,7 +60,7 @@ path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
 
-[node name="LeftEdge" type="CSGPolygon3D" parent="Path3D"]
+[node name="LeftEdge" type="CSGPolygon3D" parent="SpawnerPath3D"]
 polygon = PackedVector2Array(-0.75, 0, -0.75, 0.25, -0.5, 0.25, -0.5, 0)
 mode = 2
 path_node = NodePath("..")
@@ -70,7 +73,7 @@ path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
 
-[node name="RightEdge" type="CSGPolygon3D" parent="Path3D"]
+[node name="RightEdge" type="CSGPolygon3D" parent="SpawnerPath3D"]
 polygon = PackedVector2Array(1.75, 0, 1.75, 0.25, 1.5, 0.25, 1.5, 0)
 mode = 2
 path_node = NodePath("..")
@@ -83,24 +86,9 @@ path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
 
-[node name="Enemy" parent="Path3D" instance=ExtResource("2_331ep")]
-transform = Transform3D(0.999592, 0, -0.0285598, 0, 1, 0, 0.0285598, 0, 0.999592, 5, 0, 23)
-
-[node name="Enemy2" parent="Path3D" instance=ExtResource("2_331ep")]
-transform = Transform3D(0.998482, 0, -0.0550708, 0, 1, 0, 0.0550708, 0, 0.998482, 5.28609, 0, 18.0084)
-progress = 5.0
-
-[node name="Enemy3" parent="Path3D" instance=ExtResource("2_331ep")]
-transform = Transform3D(0.998697, 0, -0.0510222, 0, 1, 0, 0.0510222, 0, 0.998697, 5.5515, 0, 13.0153)
-progress = 10.0
-
-[node name="Enemy4" parent="Path3D" instance=ExtResource("2_331ep")]
-transform = Transform3D(0.998934, 0, -0.046162, 0, 1, 0, 0.046162, 0, 0.998934, 5.79497, 0, 8.0212)
-progress = 15.0
-
-[node name="Enemy5" parent="Path3D" instance=ExtResource("2_331ep")]
-transform = Transform3D(0.99922, 0, -0.039486, 0, 1, 0, 0.039486, 0, 0.99922, 6.01015, 0, 3.02581)
-progress = 20.0
+[node name="Timer" type="Timer" parent="SpawnerPath3D"]
+wait_time = 3.0
+autostart = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, 1, -1, 4.37114e-08, -4.37114e-08, 0, 26, 0)

@@ -19,6 +19,7 @@ func _ready() -> void:
 		_controller.button_pressed.connect(_on_button_pressed)
 	else:
 		push_error("No XRController3D found in parent nodes")
+	_set_funtion_pointer_enabled(false)
 
 func _on_button_pressed(p_button : String) -> void:
 	match p_button:
@@ -30,11 +31,20 @@ func _on_button_pressed(p_button : String) -> void:
 func shoot() -> void:
 	if _projectile_manager.get_children().size() > 5:
 		return
-	var projectile = projectile_scene.instantiate()
+	var projectile: Projectile = projectile_scene.instantiate()
 	_projectile_manager.add_child(projectile)
 	projectile.global_position = global_position
 	projectile.direction = -global_transform.basis.z
 
 func exit() -> void:
+	_set_funtion_pointer_enabled(true)
 	CommandBus.command_exit_turret()
 	queue_free()
+
+func _set_funtion_pointer_enabled(p_enabled : bool) -> void:
+	var funtion_pointer: XRToolsFunctionPointer = _controller.find_child("FunctionPointer")
+	if funtion_pointer:
+		print_debug("FunctionPointer found and set to " + str(p_enabled))
+		funtion_pointer.set_enabled(p_enabled)
+	else:
+		push_warning("No FunctionPointer found in parent nodes")

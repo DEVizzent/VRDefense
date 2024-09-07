@@ -1,7 +1,11 @@
 extends Node3D
 class_name TurretManager
-
-@export var turret_scene: PackedScene
+# The turrent_types_scenes array  must be aligned with the AbstractTurret.Type enum
+@export var turret_types_scenes: Array[PackedScene] = [
+	preload("res://scenes/elements/Turrets/turret_bow.tscn"),
+	preload("res://scenes/elements/Turrets/turret.tscn")
+]
+var active_turret_type := AbstractTurret.Type.BOW
 @export var xr_origin: XROrigin3D
 var xr_origin_position: Vector3
 
@@ -11,17 +15,26 @@ func _ready() -> void:
 	CommandBus.build_turret.connect(_on_build_turret)
 	CommandBus.control_turret.connect(_on_control_turret)
 	CommandBus.exit_turret.connect(_on_exit_turret)
+	EventBus.turret_type_selected.connect(_on_turret_type_selected)
 	
 func _on_build_turret(turret_position: Vector3) -> void:
-	var turret_instance = turret_scene.instantiate()
+	if (GameInfo.gears_amount < 50):
+		return
+	var turret_instance: AbstractTurret = turret_types_scenes[active_turret_type].instantiate()
 	add_child(turret_instance)
+	EventBus.send_turret_built(50, turret_position)
 	turret_instance.global_position = turret_position
 
 func _on_control_turret(turret_position: Vector3) -> void:
 	for turret in get_children():
-		if turret.global_position == turret_position and turret is Turret:
+		if turret.global_position == turret_position and turret is AbstractTurret:
+			print_debug("Turret control name: ", turret.name)
 			turret.activate_player_control(xr_origin)
 			return	
 
 func _on_exit_turret() -> void:
 	xr_origin.global_position = xr_origin_position
+	xr_origin.rotation = Vector3(0, 0, 0)
+
+func _on_turret_type_selected(turret_type: AbstractTurret.Type) -> void:
+	active_turret_type = turret_type

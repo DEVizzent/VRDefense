@@ -1,8 +1,9 @@
 extends PathFollow3D
 class_name Enemy
 
-@export var speed:int = 1
-@export var max_health:int = 50
+@export var speed:int = 2
+@export var max_health:int = 100
+var reward_gears : int = 5
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var health:int:
@@ -10,6 +11,7 @@ var health:int:
 		health = clamp(value, 0, max_health)
 		if health == 0:
 			animation_player.play("death")
+			EventBus.send_enemy_defeated(self)
 			return
 		animation_player.play("impact")
 @onready var base = get_tree().get_first_node_in_group("base")

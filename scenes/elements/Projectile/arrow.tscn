@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://du6lks8hw2dpn"]
+
+[ext_resource type="PackedScene" uid="uid://c3mwlcobw4nbt" path="res://scenes/elements/Projectile/projectile.tscn" id="1_mseip"]
+[ext_resource type="Script" path="res://scenes/elements/Projectile/arrow.gd" id="2_hr6bf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7mjdy"]
+size = Vector3(0.01, 1.2, 0.01)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jyp5w"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 1.2
+
+[node name="Projectile" instance=ExtResource("1_mseip")]
+collision_layer = 0
+script = ExtResource("2_hr6bf")
+speed = 100.0
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.6)
+shape = SubResource("BoxShape3D_7mjdy")
+
+[node name="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.6)
+mesh = SubResource("CylinderMesh_jyp5w")
+
+[node name="LifeTimer" parent="." index="2"]
+autostart = false

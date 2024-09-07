@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://kcacwbx2fvac"]
+
+[ext_resource type="Shader" path="res://scenes/ui/info_panel/info_panel_2d.gdshader" id="1_sleda"]
+
+[resource]
+shader = ExtResource("1_sleda")
+shader_parameter/crt_curve = 0.076
+shader_parameter/crt_scan_line_color = 0.347
+shader_parameter/aperture_grille_rate = 0.4
+shader_parameter/rf_switch_esque_blur = 1.0
+shader_parameter/white_noise_rate = 0.365

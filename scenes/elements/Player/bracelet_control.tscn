@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckoaattewl5pp"]
+
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="1_hhevy"]
+[ext_resource type="PackedScene" uid="uid://bsp1xc1ors4jg" path="res://scenes/ui/info_panel/info_panel_2d.tscn" id="2_feox6"]
+[ext_resource type="PackedScene" uid="uid://cks2h3tbw520e" path="res://scenes/ui/turret_panel/turret_panel.tscn" id="3_8og0u"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_b31sd"]
+size = Vector3(0.35, 0.15, 0.15)
+
+[node name="BraceletControl" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, -0.15)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_b31sd")
+
+[node name="GearsInfo" parent="." instance=ExtResource("1_hhevy")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.076, 0)
+screen_size = Vector2(0.24, 0.12)
+enabled = false
+collision_layer = 0
+scene = ExtResource("2_feox6")
+viewport_size = Vector2(300, 150)
+transparent = 0
+
+[node name="Viewport2Din3D" parent="." instance=ExtResource("1_hhevy")]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, 0, 0, 0.076)
+screen_size = Vector2(0.28, 0.14)
+collision_layer = 5242880
+scene = ExtResource("3_8og0u")
+viewport_size = Vector2(300, 150)
+scene_properties_keys = PackedStringArray("turret_panel.gd")

@@ -9,6 +9,9 @@ var off_hand := HandController.LEFT
 func get_main_hand() -> String:
 	return hand_to_controller_name(main_hand)
 
+func get_off_hand() -> String:
+	return hand_to_controller_name(off_hand)
+
 func hand_to_controller_name(hand: HandController) -> String:
 	match hand:
 		HandController.LEFT:

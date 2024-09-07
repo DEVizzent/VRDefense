@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://cks2h3tbw520e"]
+
+[ext_resource type="Script" path="res://scenes/ui/turret_panel/turret_panel.gd" id="1_5htvy"]
+[ext_resource type="Theme" uid="uid://b3n6ieyydxbd4" path="res://scenes/ui/turret_panel/turret_panel.tres" id="1_26g2q"]
+[ext_resource type="Texture2D" uid="uid://j6nsixu2n7fy" path="res://scenes/ui/turret_panel/bow.svg" id="2_ih6jc"]
+[ext_resource type="Texture2D" uid="uid://cs5lebxw64c8m" path="res://scenes/ui/turret_panel/bomb.svg" id="3_higwm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k244m"]
+
+[node name="TurretPanel" type="PanelContainer"]
+offset_right = 300.0
+offset_bottom = 150.0
+theme = ExtResource("1_26g2q")
+theme_override_styles/panel = SubResource("StyleBoxFlat_k244m")
+script = ExtResource("1_5htvy")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 3
+
+[node name="BowTurretButton" type="Button" parent="MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+theme = ExtResource("1_26g2q")
+icon = ExtResource("2_ih6jc")
+expand_icon = true
+
+[node name="BombTurretButton" type="Button" parent="MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+theme = ExtResource("1_26g2q")
+icon = ExtResource("3_higwm")
+expand_icon = true
+
+[node name="NextTurretButton" type="Button" parent="MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+theme = ExtResource("1_26g2q")
+disabled = true
+icon = ExtResource("2_ih6jc")
+expand_icon = true
+
+[connection signal="pressed" from="MarginContainer/GridContainer/BowTurretButton" to="." method="_on_bow_turret_button_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/BombTurretButton" to="." method="_on_bomb_turret_button_pressed"]

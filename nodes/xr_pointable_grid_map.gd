@@ -17,6 +17,9 @@ var pressed_cell_index: int
 var ignore_next_exited:bool = false
 var ignore_next_entered:bool = false
 
+func _ready() -> void:
+	EventBus.turret_built.connect(_on_turret_built)
+
 func pointer_event(event : XRToolsPointerEvent) -> void:
 	match event.event_type:
 		XRToolsPointerEvent.Type.ENTERED:
@@ -45,17 +48,15 @@ func _on_exited(_event: XRToolsPointerEvent) -> void:
 	_unhover_cell(true)
 
 func _on_pressed(_event: XRToolsPointerEvent) -> void:
+	print_debug("Pressed on: " + str(hover_previous_index))
 	match hover_previous_index:
 		CellItem.EMPTY:
 			CommandBus.command_build_turret(map_to_local(hover_position))
-			hover_previous_index = CellItem.BUILT
 		CellItem.BUILT:
 			CommandBus.command_control_turret(map_to_local(hover_position))
-	
-	
 
 func _on_released(_event: XRToolsPointerEvent) -> void:
-	print_debug("RELEASED")
+	pass
 
 func _on_moved(event: XRToolsPointerEvent) -> void:
 	last_hover_position = hover_position
@@ -81,4 +82,5 @@ func _unhover_cell(force:bool) -> void:
 		return
 	set_cell_item(last_hover_position, hover_previous_index)
 	
-	
+func _on_turret_built(_cost:int, turret_position: Vector3) -> void:
+	set_cell_item(local_to_map(turret_position), CellItem.BUILT)
