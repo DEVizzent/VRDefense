@@ -1,40 +1,16 @@
-[gd_scene load_steps=33 format=3 uid="uid://dkrif5705ke5o"]
+[gd_scene load_steps=21 format=3 uid="uid://ol0ya26dvhk4"]
 
-[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_7o0jk"]
-[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="2_d7434"]
-[ext_resource type="Script" path="res://scenes/elements/Turrets/Bombs/pickable_bomb.gd" id="2_dimoe"]
-[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="3_iecaq"]
-[ext_resource type="Animation" uid="uid://db62hs5s4n2b3" path="res://addons/godot-xr-tools/hands/animations/left/Grip 4.res" id="4_o5pv6"]
-[ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="5_ikacc"]
-[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="6_2x5fq"]
-[ext_resource type="Animation" uid="uid://d1xnpyc08njjx" path="res://addons/godot-xr-tools/hands/animations/right/Grip 4.res" id="7_er4y4"]
-[ext_resource type="Texture2D" uid="uid://caqkn3isoex11" path="res://scenes/elements/Turrets/Bombs/white-circle.png" id="8_1ss5r"]
-[ext_resource type="Script" path="res://scenes/elements/Turrets/Bombs/bomb.gd" id="9_ktv0d"]
-[ext_resource type="Script" path="res://scenes/elements/Projectile/AreaDamage.gd" id="10_4ljgc"]
-[ext_resource type="Shader" path="res://scenes/elements/Turrets/Bombs/fire_ball_shader.gdshader" id="11_3pf8d"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_toka3"]
-radius = 0.1
-
-[sub_resource type="Resource" id="Resource_c8qtv"]
-script = ExtResource("5_ikacc")
-open_pose = ExtResource("4_o5pv6")
-closed_pose = ExtResource("4_o5pv6")
-
-[sub_resource type="Resource" id="Resource_es1qw"]
-script = ExtResource("5_ikacc")
-open_pose = ExtResource("7_er4y4")
-closed_pose = ExtResource("7_er4y4")
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_sul0g"]
-radius = 0.03
+[ext_resource type="Script" path="res://scenes/elements/Turrets/Bombs/bomb.gd" id="1_7wpd0"]
+[ext_resource type="Texture2D" uid="uid://caqkn3isoex11" path="res://scenes/elements/Turrets/Bombs/white-circle.png" id="2_hihrv"]
+[ext_resource type="Script" path="res://scenes/elements/Projectile/AreaDamage.gd" id="3_208s8"]
+[ext_resource type="Shader" path="res://scenes/elements/Turrets/Bombs/fire_ball_shader.gdshader" id="4_0t0fv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywy14"]
 transparency = 2
 alpha_scissor_threshold = 0.9
 alpha_antialiasing_mode = 0
 albedo_color = Color(0.978691, 0.583758, 0, 1)
-albedo_texture = ExtResource("8_1ss5r")
+albedo_texture = ExtResource("2_hihrv")
 emission_enabled = true
 emission = Color(100, 100, 0, 1)
 emission_energy_multiplier = 10.0
@@ -88,7 +64,7 @@ noise = SubResource("FastNoiseLite_kebyi")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vsna8"]
 render_priority = 0
-shader = ExtResource("11_3pf8d")
+shader = ExtResource("4_0t0fv")
 shader_parameter/color_base = Color(0.871, 0.796148, 0, 1)
 shader_parameter/noise1 = SubResource("NoiseTexture2D_xqegu")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_w8u4t")
@@ -231,40 +207,14 @@ _data = {
 "explosion": SubResource("Animation_bu1ju")
 }
 
-[node name="PickableBomb" instance=ExtResource("1_7o0jk")]
-script = ExtResource("2_dimoe")
+[node name="Bomb" type="Node3D"]
+script = ExtResource("1_7wpd0")
 
-[node name="CollisionShape3D" parent="." index="0"]
-shape = SubResource("SphereShape3D_toka3")
-
-[node name="HighlightRing" parent="." index="1" instance=ExtResource("2_d7434")]
-visible = false
-
-[node name="GrabPointHandLeft" parent="." index="2" instance=ExtResource("3_iecaq")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -0.12, 0.06, -0.04)
-hand_pose = SubResource("Resource_c8qtv")
-
-[node name="GrabPointHandRight" parent="." index="3" instance=ExtResource("6_2x5fq")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 0.12, 0.06, -0.04)
-hand_pose = SubResource("Resource_es1qw")
-
-[node name="Area3D" type="Area3D" parent="." index="4"]
-collision_layer = 0
-collision_mask = 16777216
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0896112, -0.132985)
-shape = SubResource("SphereShape3D_sul0g")
-
-[node name="Bomb" type="Node3D" parent="." index="5"]
-script = ExtResource("9_ktv0d")
-
-[node name="Timer" type="Timer" parent="Bomb" index="0"]
+[node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="Bomb" index="1"]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0929122, -0.136949)
 emitting = false
 amount = 5
@@ -275,35 +225,35 @@ mesh = SubResource("QuadMesh_xl4j8")
 spread = 180.0
 initial_velocity_max = 5.0
 
-[node name="Bomb" type="MeshInstance3D" parent="Bomb" index="2"]
+[node name="Bomb" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_5pgus")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ocg0q")
 
-[node name="Head" type="MeshInstance3D" parent="Bomb/Bomb" index="0"]
+[node name="Head" type="MeshInstance3D" parent="Bomb"]
 transform = Transform3D(1, 0, 0, 0, 0.539197, 0.84218, 0, -0.84218, 0.539197, 0, 0.0522068, -0.0760377)
 mesh = SubResource("CylinderMesh_q8cdd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Bomb/Bomb/Head" index="0"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Bomb/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0379262, 0.000389595)
 mesh = SubResource("CylinderMesh_g5o6a")
 
-[node name="AreaDamage" type="Area3D" parent="Bomb" index="3"]
+[node name="AreaDamage" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 32
 monitorable = false
-script = ExtResource("10_4ljgc")
+script = ExtResource("3_208s8")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bomb/AreaDamage" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaDamage"]
 shape = SubResource("CylinderShape3D_2johu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Bomb" index="4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
 mesh = SubResource("SphereMesh_ls8lr")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_vsna8")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Bomb" index="5"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_sstk4")
