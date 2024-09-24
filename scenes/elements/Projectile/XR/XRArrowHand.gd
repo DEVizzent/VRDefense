@@ -7,9 +7,9 @@ var _projectile_manager: Node3D
 var current_arrow: Projectile
 var current_bow: Node3D
 var active_button_action : String = "trigger_click"
-var exit_button_action : String = "by_button"
 var _controller: XRController3D
 var is_in_quiver_zone: bool = false
+		
 
 func _ready() -> void:
 	_projectile_manager = get_tree().get_first_node_in_group("projectile_manager")
@@ -23,7 +23,7 @@ func _ready() -> void:
 		_controller.button_released.connect(_on_button_released)
 	else:
 		push_error("No XRController3D found in parent nodes")
-	_set_funtion_pointer_enabled(false)
+	CommandBus.exit_turret.connect(queue_free)
 
 func _process(_delta: float) -> void:
 	if not current_arrow:
@@ -36,8 +36,6 @@ func _process(_delta: float) -> void:
 
 func _on_button_pressed(p_button : String) -> void:
 	match p_button:
-		exit_button_action:
-			exit()
 		active_button_action:
 			create_arrow()
 
@@ -66,24 +64,12 @@ func shoot_current_arrow() -> void:
 	current_arrow = null
 	current_bow = null
 
-func exit() -> void:
-	CommandBus.command_exit_turret()
-	_set_funtion_pointer_enabled(true)
-	queue_free()
-
-func _set_funtion_pointer_enabled(p_enabled : bool) -> void:
-	var funtion_pointer : XRToolsFunctionPointer = _controller.find_child("FunctionPointer")
-	if funtion_pointer:
-		print_debug("FunctionPointer found and set to " + str(p_enabled))
-		funtion_pointer.set_enabled(p_enabled)
-	else:
-		push_warning("No FunctionPointer found in parent nodes")
-
 func _on_area_entered(area:Area3D) -> void:
 	if area.name == "XRQuiver":
 		is_in_quiver_zone = true
 	if area.name == "XRBowHand" and current_arrow:
 		current_bow = area
 		
-func _on_area_exited(_area : Area3D) -> void:
-	is_in_quiver_zone = false
+func _on_area_exited(area : Area3D) -> void:
+	if area.name == "XRQuiver":
+		is_in_quiver_zone = false

@@ -14,9 +14,9 @@ var health:int:
 			EventBus.send_enemy_defeated(self)
 			return
 		animation_player.play("impact")
-@onready var base = get_tree().get_first_node_in_group("base")
+@onready var base : Node3D = get_tree().get_first_node_in_group("base")
 
-func _ready():
+func _ready() -> void:
 	health = max_health
 
 func _process(delta: float) -> void:

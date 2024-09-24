@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://gefalw6qou0s"]
+
+[ext_resource type="Script" path="res://scenes/elements/Projectile/XR/xr_turret_control_component.gd" id="1_g0t32"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gj8ls"]
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b0gtf"]
+albedo_color = Color(0.978691, 0.583758, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_fqyxd"]
+material = SubResource("StandardMaterial3D_b0gtf")
+radius = 0.05
+height = 0.2
+
+[node name="XRFirePoint" type="Area3D"]
+collision_layer = 16777216
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0138758, 0)
+shape = SubResource("SphereShape3D_gj8ls")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_fqyxd")
+
+[node name="XRTurretControlComponent" type="Node" parent="."]
+script = ExtResource("1_g0t32")

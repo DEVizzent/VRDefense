@@ -3,7 +3,7 @@ class_name TurretManager
 # The turrent_types_scenes array  must be aligned with the AbstractTurret.Type enum
 @export var turret_types_scenes: Array[PackedScene] = [
 	preload("res://scenes/elements/Turrets/turret_bow.tscn"),
-	preload("res://scenes/elements/Turrets/turret.tscn")
+	preload("res://scenes/elements/Turrets/Bombs/turret_bomb.tscn")
 ]
 var active_turret_type := AbstractTurret.Type.BOW
 @export var xr_origin: XROrigin3D
@@ -12,6 +12,7 @@ var xr_origin_position: Vector3
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	xr_origin_position = xr_origin.global_position
+	DK.set_current_camera(xr_origin.find_child("XRCamera3D"))
 	CommandBus.build_turret.connect(_on_build_turret)
 	CommandBus.control_turret.connect(_on_control_turret)
 	CommandBus.exit_turret.connect(_on_exit_turret)
@@ -28,7 +29,6 @@ func _on_build_turret(turret_position: Vector3) -> void:
 func _on_control_turret(turret_position: Vector3) -> void:
 	for turret in get_children():
 		if turret.global_position == turret_position and turret is AbstractTurret:
-			print_debug("Turret control name: ", turret.name)
 			turret.activate_player_control(xr_origin)
 			return	
 

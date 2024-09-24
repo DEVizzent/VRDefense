@@ -5,11 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://bn34dj2nc3rma" path="res://scenes/levels/map_test.tscn" id="3_2khuo"]
 [ext_resource type="PackedScene" uid="uid://ckoaattewl5pp" path="res://scenes/elements/Player/bracelet_control.tscn" id="3_whgwk"]
 [ext_resource type="Script" path="res://nodes/turret_manager.gd" id="4_5t6qb"]
-[ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="4_ymi7o"]
+[ext_resource type="Script" path="res://scenes/elements/Projectile/XR/MainHandContextControls.gd" id="4_7vy8g"]
 
 [node name="SceneBase" instance=ExtResource("1_ub0mf")]
 
 [node name="PlayerOverview" type="Node3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
 
 [node name="XROrigin3D" parent="." index="1"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16, 10, 0)
@@ -23,11 +24,14 @@ show_target = true
 [node name="BraceletControl" parent="XROrigin3D/LeftHand" index="1" instance=ExtResource("3_whgwk")]
 transform = Transform3D(0.422618, -0.906308, -3.9616e-08, 0, -4.37114e-08, 1, -0.906308, -0.422618, -1.84732e-08, -0.06, -0.05, 0.25)
 
-[node name="LeftHand" parent="XROrigin3D/LeftHand" index="2" instance=ExtResource("4_ymi7o")]
-visible = false
+[node name="MainHandContextControls" type="Node" parent="XROrigin3D/LeftHand" index="2"]
+script = ExtResource("4_7vy8g")
 
 [node name="FunctionPointer" parent="XROrigin3D/RightHand" index="0" instance=ExtResource("2_dsuwd")]
 distance = 50.0
+
+[node name="MainHandContextControls" type="Node" parent="XROrigin3D/RightHand" index="1"]
+script = ExtResource("4_7vy8g")
 
 [node name="Map" parent="." index="2" instance=ExtResource("3_2khuo")]
 

@@ -1,0 +1,303 @@
+[gd_scene load_steps=32 format=3 uid="uid://dkrif5705ke5o"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_7o0jk"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="2_d7434"]
+[ext_resource type="Script" path="res://scenes/elements/Turrets/Bombs/pickable_bomb.gd" id="2_dimoe"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="3_iecaq"]
+[ext_resource type="Animation" uid="uid://db62hs5s4n2b3" path="res://addons/godot-xr-tools/hands/animations/left/Grip 4.res" id="4_o5pv6"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="5_ikacc"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="6_2x5fq"]
+[ext_resource type="Animation" uid="uid://d1xnpyc08njjx" path="res://addons/godot-xr-tools/hands/animations/right/Grip 4.res" id="7_er4y4"]
+[ext_resource type="Texture2D" uid="uid://caqkn3isoex11" path="res://scenes/elements/Turrets/Bombs/white-circle.png" id="8_1ss5r"]
+[ext_resource type="Script" path="res://scenes/elements/Projectile/AreaDamage.gd" id="10_4ljgc"]
+[ext_resource type="Shader" path="res://scenes/elements/Turrets/Bombs/fire_ball_shader.gdshader" id="11_3pf8d"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_toka3"]
+radius = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_5pgus"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ocg0q"]
+albedo_color = Color(0.05, 0.05, 0.05, 1)
+metallic = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_q8cdd"]
+material = SubResource("StandardMaterial3D_ocg0q")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_g5o6a"]
+top_radius = 0.005
+bottom_radius = 0.005
+height = 0.06
+
+[sub_resource type="Resource" id="Resource_c8qtv"]
+script = ExtResource("5_ikacc")
+open_pose = ExtResource("4_o5pv6")
+closed_pose = ExtResource("4_o5pv6")
+
+[sub_resource type="Resource" id="Resource_es1qw"]
+script = ExtResource("5_ikacc")
+open_pose = ExtResource("7_er4y4")
+closed_pose = ExtResource("7_er4y4")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sul0g"]
+radius = 0.03
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywy14"]
+transparency = 2
+alpha_scissor_threshold = 0.9
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.978691, 0.583758, 0, 1)
+albedo_texture = ExtResource("8_1ss5r")
+emission_enabled = true
+emission = Color(100, 100, 0, 1)
+emission_energy_multiplier = 10.0
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_xl4j8"]
+material = SubResource("StandardMaterial3D_ywy14")
+size = Vector2(0.01, 0.01)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2johu"]
+radius = 6.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ls8lr"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lhf3v"]
+frequency = 0.03
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xqegu"]
+seamless = true
+noise = SubResource("FastNoiseLite_lhf3v")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kebyi"]
+noise_type = 2
+seed = 6
+frequency = 0.015
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w8u4t"]
+seamless = true
+noise = SubResource("FastNoiseLite_kebyi")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vsna8"]
+render_priority = 0
+shader = ExtResource("11_3pf8d")
+shader_parameter/color_base = Color(0.871, 0.796148, 0, 1)
+shader_parameter/noise1 = SubResource("NoiseTexture2D_xqegu")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_w8u4t")
+
+[sub_resource type="Animation" id="Animation_8c0ch"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:mesh:radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D:mesh:height")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Bomb:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_bu1ju"]
+resource_name = "explosion"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:mesh:radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.1, 6.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D:mesh:height")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.2, 12.0]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AreaDamage")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.45),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"generate_damage"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Bomb:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sstk4"]
+_data = {
+"RESET": SubResource("Animation_8c0ch"),
+"explosion": SubResource("Animation_bu1ju")
+}
+
+[node name="Bomb" instance=ExtResource("1_7o0jk")]
+script = ExtResource("2_dimoe")
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_toka3")
+
+[node name="Bomb" type="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("SphereMesh_5pgus")
+surface_material_override/0 = SubResource("StandardMaterial3D_ocg0q")
+
+[node name="Head" type="MeshInstance3D" parent="Bomb" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.539197, 0.84218, 0, -0.84218, 0.539197, 0, 0.0522068, -0.0760377)
+mesh = SubResource("CylinderMesh_q8cdd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Bomb/Head" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0379262, 0.000389595)
+mesh = SubResource("CylinderMesh_g5o6a")
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("2_d7434")]
+visible = false
+
+[node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("3_iecaq")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -0.12, 0.06, -0.04)
+hand_pose = SubResource("Resource_c8qtv")
+
+[node name="GrabPointHandRight" parent="." index="4" instance=ExtResource("6_2x5fq")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 0.12, 0.06, -0.04)
+hand_pose = SubResource("Resource_es1qw")
+
+[node name="Area3D" type="Area3D" parent="." index="5"]
+collision_layer = 0
+collision_mask = 16777216
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0896112, -0.132985)
+shape = SubResource("SphereShape3D_sul0g")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0929122, -0.136949)
+emitting = false
+amount = 5
+lifetime = 0.1
+randomness = 0.8
+local_coords = true
+mesh = SubResource("QuadMesh_xl4j8")
+spread = 180.0
+initial_velocity_max = 5.0
+
+[node name="Timer" type="Timer" parent="." index="7"]
+wait_time = 2.0
+one_shot = true
+
+[node name="AreaDamage" type="Area3D" parent="." index="8"]
+collision_layer = 0
+collision_mask = 32
+monitorable = false
+script = ExtResource("10_4ljgc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaDamage" index="0"]
+shape = SubResource("CylinderShape3D_2johu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="9"]
+visible = false
+mesh = SubResource("SphereMesh_ls8lr")
+surface_material_override/0 = SubResource("ShaderMaterial_vsna8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+libraries = {
+"": SubResource("AnimationLibrary_sstk4")
+}

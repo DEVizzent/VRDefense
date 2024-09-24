@@ -48,7 +48,6 @@ func _on_exited(_event: XRToolsPointerEvent) -> void:
 	_unhover_cell(true)
 
 func _on_pressed(_event: XRToolsPointerEvent) -> void:
-	print_debug("Pressed on: " + str(hover_previous_index))
 	match hover_previous_index:
 		CellItem.EMPTY:
 			CommandBus.command_build_turret(map_to_local(hover_position))

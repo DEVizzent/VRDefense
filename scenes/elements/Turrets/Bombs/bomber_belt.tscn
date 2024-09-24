@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqd2rhpinil3g"]
+
+[ext_resource type="Script" path="res://scenes/elements/Turrets/Bombs/snap_belt.gd" id="1_mkkvo"]
+[ext_resource type="PackedScene" uid="uid://ce7vysyvondf8" path="res://addons/godot-xr-tools/objects/snap_zone.tscn" id="1_wgaor"]
+[ext_resource type="PackedScene" uid="uid://dkrif5705ke5o" path="res://scenes/elements/Turrets/Bombs/pickable_bomb.tscn" id="2_boa72"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/objects/return_to_snap_zone.gd" id="3_s1xs1"]
+[ext_resource type="Script" path="res://scenes/elements/Projectile/XR/xr_turret_control_component.gd" id="4_tji4v"]
+
+[node name="BomberBelt" type="Node3D"]
+
+[node name="SnapBelt" type="Node3D" parent="."]
+script = ExtResource("1_mkkvo")
+
+[node name="SnapZone" parent="SnapBelt" instance=ExtResource("1_wgaor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -0.25)
+grab_distance = 0.2
+initial_object = NodePath("../../Bomb")
+
+[node name="SnapZone2" parent="SnapBelt" instance=ExtResource("1_wgaor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, -0.5)
+grab_distance = 0.2
+initial_object = NodePath("../../Bomb2")
+
+[node name="Bomb" parent="." instance=ExtResource("2_boa72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -0.1)
+
+[node name="XRToolsReturnToSnapZone" type="Node" parent="Bomb"]
+script = ExtResource("3_s1xs1")
+snap_zone_path = NodePath("../../SnapBelt/SnapZone")
+return_delay = 3.0
+
+[node name="Bomb2" parent="." instance=ExtResource("2_boa72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, -0.4)
+
+[node name="XRToolsReturnToSnapZone" type="Node" parent="Bomb2"]
+script = ExtResource("3_s1xs1")
+snap_zone_path = NodePath("../../SnapBelt/SnapZone2")
+return_delay = 3.0
+
+[node name="XRTurretControlComponent" type="Node" parent="."]
+script = ExtResource("4_tji4v")

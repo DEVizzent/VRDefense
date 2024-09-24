@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://du6lks8hw2dpn"]
+[gd_scene load_steps=10 format=3 uid="uid://du6lks8hw2dpn"]
 
 [ext_resource type="PackedScene" uid="uid://c3mwlcobw4nbt" path="res://scenes/elements/Projectile/projectile.tscn" id="1_mseip"]
 [ext_resource type="Script" path="res://scenes/elements/Projectile/arrow.gd" id="2_hr6bf"]
+[ext_resource type="Shader" uid="uid://j82r3el4db76" path="res://Nueva carpeta/panshader.tres" id="3_ne0ch"]
+[ext_resource type="Texture2D" uid="uid://bvvwcx6m2v85x" path="res://Nueva carpeta/degradat.png" id="4_qa84e"]
+[ext_resource type="ArrayMesh" uid="uid://1iburrp8kduf" path="res://Nueva carpeta/trail.obj" id="5_rdiya"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7mjdy"]
 size = Vector3(0.01, 1.2, 0.01)
@@ -10,6 +13,14 @@ size = Vector3(0.01, 1.2, 0.01)
 top_radius = 0.01
 bottom_radius = 0.01
 height = 1.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wyfcu"]
+render_priority = 0
+shader = ExtResource("3_ne0ch")
+shader_parameter/MainTex = ExtResource("4_qa84e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4b1wg"]
+gravity = Vector3(0, 0, 0)
 
 [node name="Projectile" instance=ExtResource("1_mseip")]
 collision_layer = 0
@@ -26,3 +37,13 @@ mesh = SubResource("CylinderMesh_jyp5w")
 
 [node name="LifeTimer" parent="." index="2"]
 autostart = false
+
+[node name="Trail" type="GPUParticles3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0)
+visible = false
+material_override = SubResource("ShaderMaterial_wyfcu")
+amount = 1
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_4b1wg")
+draw_pass_1 = ExtResource("5_rdiya")

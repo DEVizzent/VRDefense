@@ -1,5 +1,6 @@
 extends AbstractTurret
 class_name Turret
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func activate_player_control(xr_origin: XROrigin3D) -> void:
 	$Timer.stop()

@@ -15,7 +15,7 @@ func _on_life_timer_timeout() -> void:
 
 
 func _on_area_entered(area: Area3D) -> void:
-	var enemy = area.get_parent()
+	var enemy : Node = area.get_parent()
 	if enemy is Enemy:
 		enemy.take_damage(damage)
 		queue_free()

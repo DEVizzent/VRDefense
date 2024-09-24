@@ -44,7 +44,6 @@ func exit() -> void:
 func _set_funtion_pointer_enabled(p_enabled : bool) -> void:
 	var funtion_pointer: XRToolsFunctionPointer = _controller.find_child("FunctionPointer")
 	if funtion_pointer:
-		print_debug("FunctionPointer found and set to " + str(p_enabled))
 		funtion_pointer.set_enabled(p_enabled)
 	else:
 		push_warning("No FunctionPointer found in parent nodes")
