@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func activate_player_control(xr_origin: XROrigin3D) -> void:
 	$Timer.stop()
-	xr_origin.position = global_position + Vector3(0, 1, 0)
+	xr_origin.position = global_position + Vector3(0, 2, 0)
 	xr_origin.rotation = rotation
 	var main_hand : XRController3D = xr_origin.find_child(UserSettings.get_main_hand())
 	main_hand.add_child(xr_arrow_hand.instantiate())
