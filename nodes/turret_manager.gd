@@ -24,9 +24,10 @@ func _on_build_turret(turret_position: Vector3) -> void:
 	var turret_instance: AbstractTurret = turret_types_scenes[active_turret_type].instantiate()
 	add_child(turret_instance)
 	EventBus.send_turret_built(50, turret_position)
-	turret_instance.global_position = turret_position
+	turret_instance.global_position = turret_position + Vector3.UP
 
 func _on_control_turret(turret_position: Vector3) -> void:
+	turret_position.y = 1
 	for turret in get_children():
 		if turret.global_position == turret_position and turret is AbstractTurret:
 			turret.activate_player_control(xr_origin)
