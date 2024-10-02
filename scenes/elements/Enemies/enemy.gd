@@ -10,7 +10,7 @@ var health:int:
 	set(value):
 		health = clamp(value, 0, max_health)
 		if health == 0:
-			animation_player.play("death")
+			animation_player.play("die")
 			EventBus.send_enemy_defeated(self)
 			return
 		animation_player.play("impact")
@@ -18,6 +18,8 @@ var health:int:
 
 func _ready() -> void:
 	health = max_health
+	animation_player.animation_finished.connect(_animate_sprint)
+	_animate_sprint("")
 
 func _process(delta: float) -> void:
 	progress += delta * speed
@@ -27,3 +29,6 @@ func _process(delta: float) -> void:
 
 func take_damage(damage: int) -> void:
 	health -= damage
+
+func _animate_sprint(_anim_name: StringName) -> void:
+	animation_player.play("sprint")
