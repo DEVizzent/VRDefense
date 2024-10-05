@@ -2,6 +2,8 @@ extends AbstractTurret
 
 var fire_point_scene : PackedScene = preload("res://scenes/elements/Projectile/XR/xr_fire_point.tscn")
 var belt_scene : PackedScene = preload("res://scenes/elements/Turrets/Bombs/bomber_belt.tscn")
+@onready var character_soldier: Node3D = $"character-soldier"
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	super._ready()
@@ -27,6 +29,9 @@ func deactivate_player_control() -> void:
 
 func shoot() -> void:
 	var projectile = projectile_scene.instantiate()
-	look_at(enemies_in_range.front().global_position, Vector3.UP) 
+	character_soldier.look_at(enemies_in_range.front().global_position, Vector3.UP) 
 	add_child(projectile)
 	projectile.global_position.y += 2
+
+func idle() -> void:
+	$AnimationPlayer.play("idle")

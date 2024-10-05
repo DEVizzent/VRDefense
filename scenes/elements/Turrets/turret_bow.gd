@@ -35,6 +35,9 @@ func shoot() -> void:
 	character_soldier.look_at(enemies_in_range.front().global_position, Vector3.UP) 
 	character_soldier.rotate_object_local(Vector3.UP, PI)
 	
+func idle() -> void:
+	$AnimationPlayer.play("idle_bow")
+	
 func invoke_arrow() -> void:
 	var projectile:Arrow = projectile_scene.instantiate()
 	character_soldier.look_at(enemies_in_range.front().global_position + Vector3.UP, Vector3.UP)

@@ -24,6 +24,9 @@ func deactivate_player_control() -> void:
 func shoot() -> void:
 	push_error("Overwrite the method of the abstract class")
 
+func idle() -> void:
+	push_error("Overwrite the method of the abstract class")
+
 func _on_area_entered(area:Area3D) -> void:
 	var enemy : Node3D = area.get_parent()
 	if enemy is Enemy:
@@ -38,6 +41,8 @@ func _on_area_exited(area:Area3D) -> void:
 		enemies_in_range.erase(enemy)
 	if enemies_in_range.size() == 0:
 		$Timer.stop()
+		idle()
+		
 
 func _on_timer_timeout() -> void:
 	if enemies_in_range.size() == 0:
