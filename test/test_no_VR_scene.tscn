@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgu5uvsp7nxvl"]
+
+[ext_resource type="PackedScene" uid="uid://bn34dj2nc3rma" path="res://scenes/levels/map_test.tscn" id="1_bpjxk"]
+[ext_resource type="Script" path="res://nodes/turret_manager.gd" id="2_2mmp2"]
+[ext_resource type="PackedScene" uid="uid://c3kl3rvqgmf15" path="res://scenes/elements/Turrets/Bombs/turret_bomb.tscn" id="3_lhnb0"]
+[ext_resource type="PackedScene" uid="uid://nxmhdco3ykew" path="res://scenes/elements/Turrets/turret_bow.tscn" id="4_1u82m"]
+[ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="4_qjpmg"]
+[ext_resource type="PackedScene" uid="uid://ckoaattewl5pp" path="res://scenes/elements/Player/bracelet_control.tscn" id="5_ovtrr"]
+[ext_resource type="Script" path="res://scenes/elements/Projectile/XR/MainHandContextControls.gd" id="6_qgkii"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Map" parent="." instance=ExtResource("1_bpjxk")]
+
+[node name="TurretManager" type="Node3D" parent="." node_paths=PackedStringArray("xr_origin")]
+script = ExtResource("2_2mmp2")
+xr_origin = NodePath("../XROrigin3D")
+
+[node name="TurretBomb" parent="TurretManager" instance=ExtResource("3_lhnb0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 2)
+
+[node name="Turret" parent="TurretManager" instance=ExtResource("4_1u82m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -2)
+
+[node name="ProjectileManager" type="Node3D" parent="." groups=["projectile_manager"]]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.422618, 0.906308, 0, 0.906308, 0.422618, -1, 1.84732e-08, -3.9616e-08, 18, 10, 0)
+current = true
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16, 10, 0)
+visible = false
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+far = 300.0
+
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+pose = &"aim"
+
+[node name="FunctionPointer" parent="XROrigin3D/LeftHand" instance=ExtResource("4_qjpmg")]
+enabled = false
+distance = 50.0
+show_laser = 0
+show_target = true
+
+[node name="BraceletControl" parent="XROrigin3D/LeftHand" instance=ExtResource("5_ovtrr")]
+transform = Transform3D(0.422618, -0.906308, -3.9616e-08, 0, -4.37114e-08, 1, -0.906308, -0.422618, -1.84732e-08, -0.06, -0.05, 0.25)
+
+[node name="MainHandContextControls" type="Node" parent="XROrigin3D/LeftHand"]
+script = ExtResource("6_qgkii")
+
+[node name="RightHand" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+pose = &"aim"
+
+[node name="FunctionPointer" parent="XROrigin3D/RightHand" instance=ExtResource("4_qjpmg")]
+distance = 50.0
+
+[node name="MainHandContextControls" type="Node" parent="XROrigin3D/RightHand"]
+script = ExtResource("6_qgkii")

@@ -8,8 +8,7 @@ radius = 0.2
 
 [node name="MinionBomb" type="Area3D"]
 collision_layer = 0
-collision_mask = 32
-monitorable = false
+collision_mask = 1048608
 script = ExtResource("1_p1kph")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
