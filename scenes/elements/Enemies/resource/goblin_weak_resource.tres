@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=4 format=3 uid="uid://ndrgb57thq8q"]
+
+[ext_resource type="Script" path="res://scenes/elements/waves/enemy_resource.gd" id="1_gwdsh"]
+[ext_resource type="Resource" uid="uid://dykkcw5cfhmy5" path="res://scenes/elements/enemies/resource/stats/goblin/goblin_weak.tres" id="1_jlot6"]
+[ext_resource type="PackedScene" uid="uid://bu0xigef7dydr" path="res://scenes/elements/enemies/goblin.tscn" id="2_bfkdy"]
+
+[resource]
+script = ExtResource("1_gwdsh")
+scene = ExtResource("2_bfkdy")
+enemy_stats = ExtResource("1_jlot6")

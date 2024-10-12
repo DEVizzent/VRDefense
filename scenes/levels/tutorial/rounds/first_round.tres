@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Round" load_steps=8 format=3 uid="uid://crdwmfhowg7eg"]
+
+[ext_resource type="Script" path="res://scenes/elements/waves/round.gd" id="1_wfb8y"]
+[ext_resource type="Script" path="res://scenes/elements/waves/wave.gd" id="2_5085u"]
+[ext_resource type="Resource" uid="uid://ndrgb57thq8q" path="res://scenes/elements/enemies/resource/goblin_weak_resource.tres" id="3_6r8pu"]
+[ext_resource type="Resource" uid="uid://d2nb1qmiedb3r" path="res://scenes/elements/enemies/resource/goblin_resource.tres" id="4_rq7u2"]
+
+[sub_resource type="Resource" id="Resource_4bsmt"]
+script = ExtResource("2_5085u")
+duration = 20.0
+enemies = Array[Resource]([ExtResource("3_6r8pu"), ExtResource("3_6r8pu")])
+rest_time = 0.0
+
+[sub_resource type="Resource" id="Resource_4dfl3"]
+script = ExtResource("2_5085u")
+duration = 10.0
+enemies = Array[Resource]([ExtResource("3_6r8pu"), ExtResource("3_6r8pu"), ExtResource("3_6r8pu")])
+rest_time = 0.0
+
+[sub_resource type="Resource" id="Resource_tli1w"]
+script = ExtResource("2_5085u")
+duration = 20.0
+enemies = Array[Resource]([ExtResource("3_6r8pu"), ExtResource("4_rq7u2")])
+rest_time = 0.0
+
+[resource]
+script = ExtResource("1_wfb8y")
+waves = Array[ExtResource("2_5085u")]([SubResource("Resource_4bsmt"), SubResource("Resource_4dfl3"), SubResource("Resource_tli1w")])

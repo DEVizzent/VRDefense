@@ -3,6 +3,7 @@ class_name Enemy
 
 @export var speed:int = 2
 @export var max_health:int = 100
+@export var meshes: Array[MeshInstance3D]
 var reward_gears : int = 5
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -20,6 +21,17 @@ func _ready() -> void:
 	health = max_health
 	animation_player.animation_finished.connect(_animate_sprint)
 	_animate_sprint("")
+
+func init(stats: EnemyStats) -> void:
+	max_health = stats.health
+	speed = stats.speed
+	_set_colormap_from_stats(stats)
+
+func _set_colormap_from_stats(stats: EnemyStats) -> void:
+	if not stats.material:
+		return
+	for mesh in meshes:
+		mesh.set_surface_override_material(0, stats.material)
 
 func _process(delta: float) -> void:
 	progress += delta * speed
