@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=6 format=3 uid="uid://d2nb1qmiedb3r"]
+
+[ext_resource type="Script" path="res://scenes/elements/waves/enemy_stats.gd" id="1_op4e2"]
+[ext_resource type="Material" uid="uid://bdiq7dt2pmkqm" path="res://scenes/elements/enemies/goblin/goblin_purple_material.tres" id="1_pbmjr"]
+[ext_resource type="PackedScene" uid="uid://bu0xigef7dydr" path="res://scenes/elements/enemies/goblin/goblin.tscn" id="3_ho50r"]
+[ext_resource type="Script" path="res://scenes/elements/waves/enemy_resource.gd" id="3_rfntx"]
+
+[sub_resource type="Resource" id="Resource_18y4k"]
+script = ExtResource("1_op4e2")
+health = 120
+speed = 2.0
+reward_gears = 10
+material = ExtResource("1_pbmjr")
+
+[resource]
+script = ExtResource("3_rfntx")
+scene = ExtResource("3_ho50r")
+enemy_stats = SubResource("Resource_18y4k")

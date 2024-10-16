@@ -1,6 +1,6 @@
 extends Path3D
 
-@onready var timer:Timer = $Timer
+@onready var timer: Timer = $Timer
 @export var time_betweent_rounds: float = 5.0
 @export var enemy_scene: PackedScene
 @export var round_collection : Array[Round]
@@ -21,10 +21,13 @@ func _ready() -> void:
 func update_spawn_time()->void:
 	var duration: float = round_collection[current_round_index].waves[current_wave_index].duration
 	var enemies_on_wave: int = round_collection[current_round_index].waves[current_wave_index].enemies.size()
-	timer.wait_time = duration/float(enemies_on_wave)
+	if enemies_on_wave < 2:
+		timer.wait_time = duration
+		return
+	timer.wait_time = duration/float(enemies_on_wave-1)
 	
 func spawn_enemy() -> void:
-	if (next_enemy_index == 0 and current_wave_index == 0):
+	if (next_enemy_index == 0):
 		update_spawn_time()
 	_add_current_enemy_to_scene()
 	next_enemy_index += 1
@@ -34,7 +37,7 @@ func spawn_enemy() -> void:
 	next_enemy_index = 0
 	current_wave_index += 1
 	if has_next_wave():
-		update_spawn_time()
+		timer.wait_time = round_collection[current_round_index].waves[current_wave_index].rest_time
 		return
 	current_wave_index = 0
 	current_round_index += 1

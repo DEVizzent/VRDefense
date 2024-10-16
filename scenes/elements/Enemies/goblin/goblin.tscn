@@ -1,8 +1,8 @@
 [gd_scene load_steps=36 format=4 uid="uid://bu0xigef7dydr"]
 
 [ext_resource type="Script" path="res://scenes/elements/enemies/enemy.gd" id="1_u12g5"]
-[ext_resource type="Material" uid="uid://cbqprs4eljqhi" path="res://scenes/elements/enemies/goblin_material_unshaded.tres" id="2_m2jar"]
-[ext_resource type="Material" uid="uid://snt3j30p2qss" path="res://scenes/elements/enemies/goblin_material.tres" id="3_ijt7h"]
+[ext_resource type="Material" uid="uid://cbqprs4eljqhi" path="res://scenes/elements/enemies/goblin/goblin_material_unshaded.tres" id="2_m2jar"]
+[ext_resource type="Material" uid="uid://snt3j30p2qss" path="res://scenes/elements/enemies/goblin/goblin_material.tres" id="3_ijt7h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uvqvs"]
 radius = 1.0
@@ -74,30 +74,6 @@ blend_shape_mode = 0
 
 [sub_resource type="Animation" id="Animation_c0ekb"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("character-orc/Skeleton3D/head-mesh:surface_material_override/0")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_ijt7h")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("character-orc/Skeleton3D/body-mesh:surface_material_override/0")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_ijt7h")]
-}
 
 [sub_resource type="Animation" id="Animation_k4jv0"]
 resource_name = "attack-kick-left"
@@ -591,36 +567,18 @@ tracks/11/path = NodePath(".")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0.4),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.0666667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
+"args": [],
+"method": &"show_impact_material"
+}, {
+"args": [],
+"method": &"show_regular_material"
+}, {
 "args": [],
 "method": &"queue_free"
 }]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("character-orc/Skeleton3D/head-mesh:surface_material_override/0")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0, 0.0666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("2_m2jar"), ExtResource("3_ijt7h")]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("character-orc/Skeleton3D/body-mesh:surface_material_override/0")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0, 0.0666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("2_m2jar"), ExtResource("3_ijt7h")]
 }
 
 [sub_resource type="Animation" id="Animation_t5sac"]
@@ -1517,29 +1475,22 @@ tracks/10/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 [sub_resource type="Animation" id="Animation_1qdmc"]
 resource_name = "impact"
 length = 0.1
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("character-orc/Skeleton3D/head-mesh:surface_material_override/0")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.0666667),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("2_m2jar"), ExtResource("3_ijt7h")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("character-orc/Skeleton3D/body-mesh:surface_material_override/0")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("2_m2jar"), ExtResource("3_ijt7h")]
+"values": [{
+"args": [],
+"method": &"show_impact_material"
+}, {
+"args": [],
+"method": &"show_regular_material"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_prfea"]

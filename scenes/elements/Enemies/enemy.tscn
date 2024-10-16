@@ -1,8 +1,8 @@
 [gd_scene load_steps=36 format=4 uid="uid://bdgeptrlnytvr"]
 
 [ext_resource type="Script" path="res://scenes/elements/enemies/enemy.gd" id="1_4kqo0"]
-[ext_resource type="Material" uid="uid://cbqprs4eljqhi" path="res://scenes/elements/enemies/goblin_material_unshaded.tres" id="2_en8ye"]
-[ext_resource type="Material" uid="uid://snt3j30p2qss" path="res://scenes/elements/enemies/goblin_material.tres" id="2_y3i1o"]
+[ext_resource type="Material" uid="uid://cbqprs4eljqhi" path="res://scenes/elements/enemies/goblin/goblin_material_unshaded.tres" id="2_en8ye"]
+[ext_resource type="Material" uid="uid://snt3j30p2qss" path="res://scenes/elements/enemies/goblin/goblin_material.tres" id="2_y3i1o"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uvqvs"]
 radius = 1.0
