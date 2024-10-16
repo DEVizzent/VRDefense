@@ -1,6 +1,6 @@
 extends Resource
 class_name Wave
 
-@export var duration: float
+@export_range(.1, 25.) var duration: float = 1.
 @export var enemies: Array[EnemyResource]
-@export var rest_time: float
+@export_range(.1, 25.) var rest_time: float = 1.
