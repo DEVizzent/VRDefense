@@ -23,11 +23,13 @@ func explosion() -> void:
 	on_fire_particle.emitting = false
 
 func make_visible(_pickable: XRToolsPickable) -> void:
-	animation_player.play("RESET")
+	reset_bomb()
 	on_fire_particle.emitting = false
+
+func reset_bomb() -> void:
+	animation_player.play("RESET")
 
 func check_explosion_finished(animation_name: StringName) -> void:
 	if animation_name == "explosion":
 		explosion_finished.emit()
-		animation_player.play("RESET")
 		on_fire_particle.emitting = false

@@ -24,11 +24,15 @@ func activate_player_control(xr_origin: XROrigin3D) -> void:
 	off_hand.add_child(fire_point_scene.instantiate())
 	CommandBus.exit_turret.connect(deactivate_player_control)
 	player_control = true
+	character_soldier.visible = false
+	character_soldier.set_process(false)
 
 func deactivate_player_control() -> void:
 	$Timer.start()
 	CommandBus.exit_turret.disconnect(deactivate_player_control)
 	player_control = false
+	character_soldier.visible = true
+	character_soldier.set_process(true)
 
 func shoot() -> void:
 	var bomb: Area3D = bombs_pool.get_child(0)

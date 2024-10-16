@@ -22,14 +22,15 @@ func throw(throw_direction: Vector3) -> void:
 	speed_3d = (throw_direction * speed) + Vector3.UP
 
 func explosion(_area_or_body: Node3D) -> void:
-	$Bomb.explosion()
+	bomb.explosion()
 	speed_3d = Vector3.ZERO
 	#monitoring = false
 
 func set_fire() -> void:
-	$Bomb.set_fire()
+	bomb.set_fire()
 	#monitoring = true
 
 func back_to_origin_position() -> void:
 	is_thrown = false
 	position = Vector3.ZERO
+	bomb.reset_bomb()
