@@ -1,9 +1,11 @@
 extends Area3D
 class_name XRArrowHand
 
-@onready var shoot: AudioStreamPlayer3D = $Shoot
-@onready var slow_draw: AudioStreamPlayer3D = $SlowDraw
-@onready var fast_draw: AudioStreamPlayer3D = $FastDraw
+
+@onready var shot_sound: AudioStreamPlayer3D = $ShotSound
+@onready var fast_draw_sound: AudioStreamPlayer3D = $FastDrawSound
+@onready var slow_draw_sound: AudioStreamPlayer3D = $SlowDrawSound
+
 
 var arrow_scene: PackedScene = preload("res://scenes/elements/Projectile/arrow.tscn")
 var _projectile_manager: Node3D
@@ -47,7 +49,6 @@ func _on_button_pressed(p_button : String) -> void:
 func _on_button_released(p_button : String) -> void:
 	if p_button != active_button_action:
 		return
-
 	shoot_current_arrow()
 
 func create_arrow() -> void:
@@ -64,10 +65,11 @@ func shoot_current_arrow() -> void:
 	var arrow_speed : float = 0.0
 	if current_bow:
 		arrow_speed = current_bow.global_transform.origin.distance_to(global_transform.origin) * 50.0
-		shoot.play()
-		slow_draw.stop()
-		fast_draw.stop()
+		shot_sound.play()
+		slow_draw_sound.stop()
+		fast_draw_sound.stop()
 		_controller.trigger_haptic_pulse("haptic", .0, 1. if arrow_speed > 40. else .5, .1, 0)
+		current_bow.send_haptics("haptic", .0, 1. if arrow_speed > 40. else .5, .1, 0)
 	current_arrow.speed = arrow_speed
 	current_arrow.throw()
 	current_arrow = null
@@ -84,19 +86,22 @@ func _on_area_exited(area : Area3D) -> void:
 		is_in_quiver_zone = false
 
 func play_draw_sound() -> void:
-	var length : float = _controller.get_pose().linear_velocity.length()
-	if length < 0.05 :
-		slow_draw.stop()
-		fast_draw.stop()
+	var velocity : float = _controller.get_pose().linear_velocity.length()
+	if velocity < 0.05 :
+		fast_draw_sound.stop()
+		slow_draw_sound.stop()
 		return
-	if length < .3 and not slow_draw.is_playing():
-		slow_draw.play()
-		fast_draw.stop()
-	if fast_draw.is_playing(): 
+	if velocity < .3:
+		if (slow_draw_sound.is_playing()):
+			return
+		slow_draw_sound.play()
+		fast_draw_sound.stop()
 		return
-	slow_draw.stop()
-	fast_draw.play()
-	
+	if (fast_draw_sound.is_playing()): 
+		return
+	slow_draw_sound.stop()
+	fast_draw_sound.play()
+
 func send_haptics() -> void:
 	var bow_distance: float = current_bow.global_transform.origin.distance_to(global_transform.origin)
 	if bow_distance < .6 :
@@ -104,3 +109,4 @@ func send_haptics() -> void:
 	if bow_distance > 1.:
 		bow_distance = 1.0
 	_controller.trigger_haptic_pulse("haptic", 0.0 , bow_distance*.1, 1, 0)
+	current_bow.send_haptics("haptic", 0.0 , bow_distance*.1, 1, 0)
