@@ -1,9 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://ol0ya26dvhk4"]
+[gd_scene load_steps=24 format=3 uid="uid://ol0ya26dvhk4"]
 
 [ext_resource type="Script" path="res://scenes/elements/Turrets/Bombs/bomb.gd" id="1_7wpd0"]
 [ext_resource type="Texture2D" uid="uid://caqkn3isoex11" path="res://scenes/elements/Turrets/Bombs/white-circle.png" id="2_hihrv"]
 [ext_resource type="Script" path="res://scenes/elements/Projectile/AreaDamage.gd" id="3_208s8"]
 [ext_resource type="Shader" path="res://scenes/elements/Turrets/Bombs/fire_ball_shader.gdshader" id="4_0t0fv"]
+[ext_resource type="AudioStream" uid="uid://d2gwb5cbe4qlj" path="res://scenes/elements/Turrets/Bombs/sounds/sizzle.ogg" id="5_03xfq"]
+[ext_resource type="AudioStream" uid="uid://deuvmianwom1r" path="res://scenes/elements/Turrets/Bombs/sounds/explosion.ogg" id="6_j12jo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywy14"]
 transparency = 2
@@ -207,6 +209,15 @@ _data = {
 "explosion": SubResource("Animation_bu1ju")
 }
 
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_ef2u1"]
+clip_count = 2
+clip_0/name = &"Sizzle"
+clip_0/stream = ExtResource("5_03xfq")
+clip_0/auto_advance = 0
+clip_1/name = &"Explosion"
+clip_1/stream = ExtResource("6_j12jo")
+clip_1/auto_advance = 0
+
 [node name="Bomb" type="Node3D"]
 script = ExtResource("1_7wpd0")
 
@@ -226,6 +237,7 @@ spread = 180.0
 initial_velocity_max = 5.0
 
 [node name="Bomb" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_5pgus")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ocg0q")
@@ -248,7 +260,6 @@ script = ExtResource("3_208s8")
 shape = SubResource("CylinderShape3D_2johu")
 
 [node name="Explosion" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("SphereMesh_ls8lr")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_vsna8")
@@ -258,3 +269,7 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_sstk4")
 }
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamInteractive_ef2u1")
+bus = &"Effects"

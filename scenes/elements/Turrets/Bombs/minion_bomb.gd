@@ -24,11 +24,9 @@ func throw(throw_direction: Vector3) -> void:
 func explosion(_area_or_body: Node3D) -> void:
 	bomb.explosion()
 	speed_3d = Vector3.ZERO
-	#monitoring = false
 
 func set_fire() -> void:
 	bomb.set_fire()
-	#monitoring = true
 
 func back_to_origin_position() -> void:
 	is_thrown = false

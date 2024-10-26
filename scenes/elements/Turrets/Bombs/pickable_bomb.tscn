@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dkrif5705ke5o"]
+[gd_scene load_steps=20 format=3 uid="uid://dkrif5705ke5o"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_7o0jk"]
 [ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="2_d7434"]
@@ -9,6 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="6_2x5fq"]
 [ext_resource type="Animation" uid="uid://d1xnpyc08njjx" path="res://addons/godot-xr-tools/hands/animations/right/Grip 4.res" id="7_er4y4"]
 [ext_resource type="PackedScene" uid="uid://ol0ya26dvhk4" path="res://scenes/elements/Turrets/Bombs/bomb.tscn" id="9_c31v1"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/audio/pickable_audio.gd" id="10_ivwpm"]
+[ext_resource type="AudioStream" uid="uid://dvg81jh74wego" path="res://scenes/elements/Turrets/Bombs/sounds/drop.ogg" id="11_e17s5"]
+[ext_resource type="AudioStream" uid="uid://dunmrks7tj4yx" path="res://scenes/elements/Turrets/Bombs/sounds/pick.ogg" id="12_t2cp7"]
+[ext_resource type="AudioStream" uid="uid://bi8dy2jgildf2" path="res://scenes/elements/Turrets/Bombs/sounds/hit1.ogg" id="13_voe6p"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/audio/pickable_audio_type.gd" id="14_3ypc2"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_toka3"]
 radius = 0.1
@@ -25,6 +30,13 @@ closed_pose = ExtResource("7_er4y4")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sul0g"]
 radius = 0.03
+
+[sub_resource type="Resource" id="Resource_3eauw"]
+script = ExtResource("14_3ypc2")
+name = ""
+grab_sound = ExtResource("12_t2cp7")
+drop_sound = ExtResource("11_e17s5")
+hit_sound = ExtResource("13_voe6p")
 
 [node name="PickableBomb" instance=ExtResource("1_7o0jk")]
 script = ExtResource("2_dimoe")
@@ -53,3 +65,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0896112, -0.132985)
 shape = SubResource("SphereShape3D_sul0g")
 
 [node name="Bomb" parent="." index="5" instance=ExtResource("9_c31v1")]
+
+[node name="XRToolsPickableAudio" type="AudioStreamPlayer3D" parent="." index="6"]
+script = ExtResource("10_ivwpm")
+pickable_audio_type = SubResource("Resource_3eauw")
