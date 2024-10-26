@@ -12,11 +12,15 @@ var counter: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	CommandBus.start_spawner.connect(start_spawner)
 	EventBus.enemy_defeated.connect(prepare_next_round)
 	timer.timeout.connect(spawn_enemy)
 	current_round_index = 0
 	current_wave_index = 0
 	next_enemy_index = 0
+
+func start_spawner() -> void:
+	timer.start(.1)
 	
 func update_spawn_time()->void:
 	var duration: float = round_collection[current_round_index].waves[current_wave_index].duration
