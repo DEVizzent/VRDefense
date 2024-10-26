@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2kw8hfjv5wbx"]
+
+[ext_resource type="AudioStream" uid="uid://bwarhdicqb5of" path="res://scripts/music/sounds/intro.ogg" id="1_su7mr"]
+[ext_resource type="AudioStream" uid="uid://ddk3et26rqieo" path="res://scripts/music/sounds/tutorial.ogg" id="2_vce8m"]
+[ext_resource type="Script" path="res://scripts/music/music_controller.gd" id="3_eafal"]
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_oasep"]
+clip_count = 2
+clip_0/name = &"Intro"
+clip_0/stream = ExtResource("1_su7mr")
+clip_0/auto_advance = 0
+clip_1/name = &"Tutorial"
+clip_1/stream = ExtResource("2_vce8m")
+clip_1/auto_advance = 0
+_transitions = {
+Vector2i(0, 1): {
+"fade_beats": 1,
+"fade_mode": 2,
+"from_time": 0,
+"to_time": 1
+}
+}
+
+[node name="MusicController" type="AudioStreamPlayer"]
+stream = SubResource("AudioStreamInteractive_oasep")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"
+script = ExtResource("3_eafal")
