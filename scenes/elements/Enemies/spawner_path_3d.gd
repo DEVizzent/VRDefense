@@ -20,7 +20,8 @@ func _ready() -> void:
 	next_enemy_index = 0
 
 func start_spawner() -> void:
-	timer.start(.1)
+	timer.timeout.emit()
+	timer.start()
 	
 func update_spawn_time()->void:
 	var duration: float = round_collection[current_round_index].waves[current_wave_index].duration
@@ -67,6 +68,8 @@ func prepare_next_round(_enemy: Enemy) -> void:
 	if has_next_round():
 		EventBus.send_round_finished()
 		update_spawn_time()
+		if time_betweent_rounds == -1:
+			return
 		timer.start(time_betweent_rounds)
 		return
 	EventBus.send_level_finished()
