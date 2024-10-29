@@ -1,0 +1,2 @@
+extends RichTextEffect
+class_name InputTextLabel

@@ -1,7 +1,7 @@
 extends Node
 class_name GameInfoScript
 
-const INITIAL_GEARS_AMOUNT = 100
+const INITIAL_GEARS_AMOUNT = 90
 
 var gears_amount :int:
 	set(new_amount):
