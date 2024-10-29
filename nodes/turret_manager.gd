@@ -5,7 +5,8 @@ class_name TurretManager
 	preload("res://scenes/elements/Turrets/turret_bow.tscn"),
 	preload("res://scenes/elements/Turrets/Bombs/turret_bomb.tscn")
 ]
-var active_turret_type := AbstractTurret.Type.BOW
+var has_selected := false
+var active_turret_type : AbstractTurret.Type
 @export var xr_origin: XROrigin3D
 var xr_origin_position: Vector3
 
@@ -19,7 +20,7 @@ func _ready() -> void:
 	EventBus.turret_type_selected.connect(_on_turret_type_selected)
 	
 func _on_build_turret(turret_position: Vector3) -> void:
-	if (GameInfo.gears_amount < 50):
+	if (GameInfo.gears_amount < 50 or not has_selected):
 		return
 	var turret_instance: AbstractTurret = turret_types_scenes[active_turret_type].instantiate()
 	add_child(turret_instance)
@@ -39,3 +40,4 @@ func _on_exit_turret() -> void:
 
 func _on_turret_type_selected(turret_type: AbstractTurret.Type) -> void:
 	active_turret_type = turret_type
+	has_selected = true
