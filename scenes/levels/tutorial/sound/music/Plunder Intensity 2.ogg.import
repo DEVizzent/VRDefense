@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dhq888w2e886"
+path="res://.godot/imported/Plunder Intensity 2.ogg-0e6207536e4600c909eee937b927216c.oggvorbisstr"
+
+[deps]
+
+source_file="res://scenes/levels/tutorial/sound/music/Plunder Intensity 2.ogg"
+dest_files=["res://.godot/imported/Plunder Intensity 2.ogg-0e6207536e4600c909eee937b927216c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

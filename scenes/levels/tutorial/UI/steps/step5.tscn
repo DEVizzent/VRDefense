@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1d2euhwc0scu"]
+
+[ext_resource type="Script" path="res://scenes/levels/tutorial/UI/steps/temporal_step.gd" id="1_82sua"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wm4n3"]
+bg_color = Color(0.480469, 0.480469, 0.480469, 1)
+
+[node name="Steps" type="PanelContainer"]
+offset_right = 1200.0
+offset_bottom = 600.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wm4n3")
+script = ExtResource("1_82sua")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="Step0" type="CenterContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="RichTextLabel" parent="MarginContainer/Step0"]
+clip_contents = false
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 75
+bbcode_enabled = true
+text = "[center] Now kill the goblin by throwing arrow to protect your base [/center]"
+fit_content = true
+scroll_active = false
+threaded = true

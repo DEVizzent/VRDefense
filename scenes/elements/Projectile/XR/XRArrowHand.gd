@@ -58,6 +58,7 @@ func create_arrow() -> void:
 		return
 	current_arrow = arrow_scene.instantiate()
 	_projectile_manager.add_child(current_arrow)
+	EventBus.send_arrow_created()
 
 func shoot_current_arrow() -> void:
 	if not current_arrow:
@@ -72,6 +73,7 @@ func shoot_current_arrow() -> void:
 		current_bow.send_haptics("haptic", .0, 1. if arrow_speed > 40. else .5, .1, 0)
 	current_arrow.speed = arrow_speed
 	current_arrow.throw()
+	EventBus.send_arrow_thrown()
 	current_arrow = null
 	current_bow = null
 

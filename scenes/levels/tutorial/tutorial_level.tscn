@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://ci5g5y8vuyqmr"]
+[gd_scene load_steps=11 format=3 uid="uid://ci5g5y8vuyqmr"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_eqnyl"]
 [ext_resource type="Script" path="res://scenes/levels/tutorial/tutorial.gd" id="2_xs7nu"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_5j78d"]
 [ext_resource type="Texture2D" uid="uid://cyfthrc1bewsc" path="res://icon.svg" id="3_h1jyh"]
 [ext_resource type="Script" path="res://scenes/levels/show_when_level_finish.gd" id="4_smxmk"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="5_f3cs5"]
@@ -9,10 +10,6 @@
 [ext_resource type="Script" path="res://scenes/elements/Projectile/XR/MainHandContextControls.gd" id="7_0htks"]
 [ext_resource type="PackedScene" uid="uid://bheh0hjms8jdt" path="res://scenes/levels/tutorial/map_tutorial.tscn" id="8_148md"]
 [ext_resource type="Script" path="res://nodes/turret_manager.gd" id="9_auihd"]
-[ext_resource type="Texture2D" uid="uid://bhp6aifei6ras" path="res://scenes/levels/tutorial/images/Tutorial1.png" id="10_r25py"]
-[ext_resource type="Texture2D" uid="uid://cb0f75nxgc3yi" path="res://scenes/levels/tutorial/images/Tutorial2.png" id="11_0l4bx"]
-[ext_resource type="Texture2D" uid="uid://drhej5ub5ph2p" path="res://scenes/levels/tutorial/images/Tutorial3.png" id="12_rad7s"]
-[ext_resource type="Texture2D" uid="uid://ctbapvm14h0o" path="res://scenes/levels/tutorial/images/Tutorial4.png" id="13_s7tuo"]
 
 [node name="SceneBase" instance=ExtResource("1_eqnyl")]
 script = ExtResource("2_xs7nu")
@@ -22,6 +19,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
 
 [node name="XROrigin3D" parent="." index="1"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16, 10, 0)
+
+[node name="TutorialViewport" parent="XROrigin3D" index="0" instance=ExtResource("3_5j78d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91968e-07, 1.94427, -4.39172)
+enabled = false
+collision_layer = 0
+viewport_size = Vector2(1200, 600)
+throttle_fps = 1.0
+input_keyboard = false
+scene_properties_keys = PackedStringArray()
 
 [node name="Sprite3D" type="Sprite3D" parent="XROrigin3D/XRCamera3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.16719e-08, 0, -1.63966)
@@ -54,21 +60,3 @@ script = ExtResource("9_auihd")
 xr_origin = NodePath("../XROrigin3D")
 
 [node name="ProjectileManager" type="Node3D" parent="." index="4" groups=["projectile_manager"]]
-
-[node name="TutorialImages" type="Node3D" parent="." index="5"]
-transform = Transform3D(-4.37114e-08, -0.258819, 0.965926, 0, 0.965926, 0.258819, -1, 1.13133e-08, -4.2222e-08, 0, 6.44314, 0)
-
-[node name="Step1" type="Sprite3D" parent="TutorialImages" index="0"]
-texture = ExtResource("10_r25py")
-
-[node name="Step2" type="Sprite3D" parent="TutorialImages" index="1"]
-visible = false
-texture = ExtResource("11_0l4bx")
-
-[node name="Step3" type="Sprite3D" parent="TutorialImages" index="2"]
-visible = false
-texture = ExtResource("12_rad7s")
-
-[node name="Step4" type="Sprite3D" parent="TutorialImages" index="3"]
-visible = false
-texture = ExtResource("13_s7tuo")
