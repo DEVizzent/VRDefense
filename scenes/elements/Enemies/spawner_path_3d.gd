@@ -61,9 +61,6 @@ func prepare_next_round(_enemy: Enemy) -> void:
 	if get_child_count() > 2:
 		return
 	
-	if round_collection.size() >= current_round_index:
-		EventBus.send_level_finished()
-	
 	waiting_next_round = false
 	if has_next_round():
 		EventBus.send_round_finished()
