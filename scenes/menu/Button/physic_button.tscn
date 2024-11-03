@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmkf4bsndsttd"]
+
+[ext_resource type="Script" path="res://scenes/menu/Button/PhysicButton.gd" id="1_q7q5o"]
+[ext_resource type="PackedScene" uid="uid://cme66uldrjl2i" path="res://addons/godot-xr-tools/interactables/interactable_area_button.tscn" id="2_5j0ix"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cis2c"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_g7ao6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f7voa"]
+
+[node name="PhysicButton" type="Node3D"]
+script = ExtResource("1_q7q5o")
+
+[node name="InteractableAreaButton" parent="." instance=ExtResource("2_5j0ix")]
+monitorable = false
+button = NodePath("..")
+displacement = Vector3(0, 0, -0.02)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableAreaButton"]
+shape = SubResource("BoxShape3D_cis2c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_g7ao6")
+surface_material_override/0 = SubResource("StandardMaterial3D_f7voa")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.505)
+pixel_size = 0.001
+text = "Button"
+font_size = 45
+outline_size = 15
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
