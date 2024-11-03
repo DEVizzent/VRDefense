@@ -1,27 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmhocmb5ho8ab"]
+[gd_scene load_steps=8 format=3 uid="uid://dmhocmb5ho8ab"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_ub0mf"]
+[ext_resource type="Script" path="res://scenes/levels/tutorial/tutorial.gd" id="2_8h570"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="2_dsuwd"]
-[ext_resource type="Texture2D" uid="uid://cyfthrc1bewsc" path="res://icon.svg" id="2_pyhnw"]
 [ext_resource type="PackedScene" uid="uid://bn34dj2nc3rma" path="res://scenes/levels/map_test.tscn" id="3_2khuo"]
 [ext_resource type="PackedScene" uid="uid://ckoaattewl5pp" path="res://scenes/elements/Player/bracelet_control.tscn" id="3_whgwk"]
-[ext_resource type="Script" path="res://scenes/levels/show_when_level_finish.gd" id="3_xibwm"]
 [ext_resource type="Script" path="res://nodes/turret_manager.gd" id="4_5t6qb"]
 [ext_resource type="Script" path="res://scenes/elements/Projectile/XR/MainHandContextControls.gd" id="4_7vy8g"]
 
 [node name="SceneBase" instance=ExtResource("1_ub0mf")]
+script = ExtResource("2_8h570")
 
 [node name="PlayerOverview" type="Node3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
 
 [node name="XROrigin3D" parent="." index="1"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16, 10, 0)
-
-[node name="Sprite3D" type="Sprite3D" parent="XROrigin3D/XRCamera3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.16719e-08, 0, -1.63966)
-visible = false
-texture = ExtResource("2_pyhnw")
-script = ExtResource("3_xibwm")
 
 [node name="FunctionPointer" parent="XROrigin3D/LeftHand" index="0" instance=ExtResource("2_dsuwd")]
 enabled = false

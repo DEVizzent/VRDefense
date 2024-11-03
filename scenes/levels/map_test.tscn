@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://br6uco4m0pijp" path="res://scenes/elements/base.tscn" id="3_gggr7"]
 [ext_resource type="Script" path="res://scenes/elements/enemies/spawner_path_3d.gd" id="4_bbtev"]
 [ext_resource type="Script" path="res://scenes/elements/waves/round.gd" id="6_l3j17"]
-[ext_resource type="Resource" uid="uid://crdwmfhowg7eg" path="res://scenes/levels/tutorial/rounds/first_round.tres" id="7_vkgfv"]
+[ext_resource type="Resource" uid="uid://crdwmfhowg7eg" path="res://scenes/levels/tutorial/rounds/one_goblin_round.tres" id="7_vkgfv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ahee"]
 shading_mode = 2
