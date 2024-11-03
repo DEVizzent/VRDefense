@@ -19,6 +19,9 @@ func set_fire() -> void:
 	sound.play()
 	timer.start()
 
+func is_on_fire() -> bool:
+	return on_fire_particle.emitting
+
 func explosion() -> void:
 	if not timer.is_stopped():
 		timer.stop()

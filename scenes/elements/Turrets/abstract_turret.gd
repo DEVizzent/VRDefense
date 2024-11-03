@@ -9,7 +9,6 @@ enum Type {
 var player_control: bool = false
 var enemies_in_range: Array[Enemy] = []
 
-
 func _ready() -> void:
 	$Timer.timeout.connect(_on_timer_timeout)
 	area_entered.connect(_on_area_entered)
