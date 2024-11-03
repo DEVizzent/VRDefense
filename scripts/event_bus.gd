@@ -19,6 +19,10 @@ signal arrow_created()
 
 signal arrow_thrown()
 
+signal bomb_grabbed()
+
+signal bomb_thrown()
+
 func send_enemy_defeated(enemy: Enemy) -> void:
 	enemy_defeated.emit(enemy)
 
@@ -45,3 +49,9 @@ func send_arrow_created() -> void:
 	
 func send_arrow_thrown() -> void:
 	arrow_thrown.emit()
+	
+func send_bomb_grabbed() -> void:
+	bomb_grabbed.emit()
+	
+func send_bomb_thrown() -> void:
+	bomb_thrown.emit()
