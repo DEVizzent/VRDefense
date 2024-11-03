@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://f63sre6sw6xi"]
+[gd_scene load_steps=5 format=3 uid="uid://f63sre6sw6xi"]
 
 [ext_resource type="AudioStream" uid="uid://dthb1h72xi8vc" path="res://scripts/UI/sounds/success.ogg" id="1_47c47"]
+[ext_resource type="AudioStream" uid="uid://dqbr0dcl4yri" path="res://scripts/UI/sounds/end_round.ogg" id="2_g0bgd"]
 [ext_resource type="Script" path="res://scripts/UI/ui_sound_controller.gd" id="2_rcyjq"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_l7g7j"]
-clip_count = 1
+clip_count = 2
 clip_0/name = &"success"
 clip_0/stream = ExtResource("1_47c47")
 clip_0/auto_advance = 0
+clip_1/name = &"end_round"
+clip_1/stream = ExtResource("2_g0bgd")
+clip_1/auto_advance = 0
 
 [node name="UISoundController" type="AudioStreamPlayer"]
 stream = SubResource("AudioStreamInteractive_l7g7j")
