@@ -14,7 +14,7 @@ func _ready() -> void:
 func activate_player_control(xr_origin: XROrigin3D) -> void:
 	$Timer.stop()
 	xr_origin.position = global_position + Vector3(0, 2, 0)
-	xr_origin.rotation.y = character_soldier.rotation.y
+	xr_origin.rotation.y = character_soldier.rotation.y + deg_to_rad(180.0)
 	xr_origin.add_child(belt_scene.instantiate())
 	var main_hand : XRController3D = xr_origin.find_child(UserSettings.get_main_hand())
 	var function_pickup : XRToolsFunctionPickup = XRToolsFunctionPickup.new()
