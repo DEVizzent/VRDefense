@@ -220,6 +220,7 @@ func load_scene(p_scene_path : String, user_data = null) -> void:
 
 		# Wait for user to be ready
 		if prompt_for_continue:
+			prompt_for_continue = false
 			$LoadingScreen.enable_press_to_continue = true
 			await $LoadingScreen.continue_pressed
 
