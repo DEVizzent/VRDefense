@@ -36,7 +36,7 @@ func _on_control_turret(turret_position: Vector3) -> void:
 
 func _on_exit_turret() -> void:
 	xr_origin.global_position = xr_origin_position
-	xr_origin.rotation = Vector3(0, 0, 0)
+	xr_origin.rotation.y = deg_to_rad(90.0)
 
 func _on_turret_type_selected(turret_type: AbstractTurret.Type) -> void:
 	active_turret_type = turret_type
