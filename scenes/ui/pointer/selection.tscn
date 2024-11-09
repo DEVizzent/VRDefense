@@ -11,6 +11,7 @@ shader_parameter/size = 1.999
 shader_parameter/shine_width = 80.0
 
 [node name="selection" instance=ExtResource("1_fgyrd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.57719)
 
 [node name="selection-b" parent="." index="0"]
 surface_material_override/0 = SubResource("ShaderMaterial_m0u04")
