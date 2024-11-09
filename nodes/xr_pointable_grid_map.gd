@@ -18,8 +18,13 @@ var pressed_position: Vector3
 var pressed_cell_index: int
 var ignore_next_exited:bool = false
 var ignore_next_entered:bool = false
+@export var selected : PackedScene = load("res://scenes/ui/pointer/selection.tscn")
+var selected_instance : Node3D
 
 func _ready() -> void:
+	selected_instance = selected.instantiate()
+	selected_instance.visible = false
+	add_child(selected_instance)
 	EventBus.turret_built.connect(_on_turret_built)
 
 func pointer_event(event : XRToolsPointerEvent) -> void:
@@ -71,6 +76,8 @@ func _hover_cell() -> void:
 	var index:int = get_cell_item(hover_position)
 	if not is_hoverable_cell(index):
 		return
+	selected_instance.visible = true
+	selected_instance.global_position = hover_position*4 + Vector3(2.,1.,2.)
 	hover_previous_index = get_cell_item(hover_position)
 	set_cell_item(hover_position, CellItem.HOVER_EMPTY if index == CellItem.EMPTY else CellItem.HOVER_BUILT)
 	ignore_next_entered = true
@@ -82,6 +89,7 @@ func _unhover_cell(force:bool) -> void:
 		return
 	if last_hover_position == hover_position and !force:
 		return
+	selected_instance.visible = false
 	set_cell_item(last_hover_position, hover_previous_index)
 	
 func _on_turret_built(_cost:int, turret_position: Vector3) -> void:

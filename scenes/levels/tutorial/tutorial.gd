@@ -146,4 +146,4 @@ func message_tutorial_completed() -> void:
 	
 func go_back_to_menu() -> void:
 	var scene_base : XRToolsSceneBase = XRTools.find_xr_ancestor(self, "*", "XRToolsSceneBase")
-	scene_base.load_scene("res://scenes/menu/menu_board.gd")
+	scene_base.load_scene("res://scenes/menu/menu.tscn")
