@@ -2,7 +2,7 @@ extends Node3D
 class_name TurretManager
 # The turrent_types_scenes array  must be aligned with the AbstractTurret.Type enum
 @export var turret_types_scenes: Array[PackedScene] = [
-	preload("res://scenes/elements/Turrets/turret_bow.tscn"),
+	preload("res://scenes/elements/Turrets/Bow/turret_bow.tscn"),
 	preload("res://scenes/elements/Turrets/Bombs/turret_bomb.tscn")
 ]
 var has_selected := false

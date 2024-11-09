@@ -1,8 +1,8 @@
 [gd_scene load_steps=50 format=4 uid="uid://nxmhdco3ykew"]
 
-[ext_resource type="Script" path="res://scenes/elements/Turrets/turret_bow.gd" id="1_qxkx7"]
+[ext_resource type="Script" path="res://scenes/elements/Turrets/Bow/turret_bow.gd" id="1_qxkx7"]
 [ext_resource type="PackedScene" uid="uid://du6lks8hw2dpn" path="res://scenes/elements/Projectile/arrow.tscn" id="2_7xkqe"]
-[ext_resource type="Texture2D" uid="uid://dbhdixtwkeb4r" path="res://assets/turrets/bases/Textures/colormap.png" id="3_fhie6"]
+[ext_resource type="Texture2D" uid="uid://dbhdixtwkeb4r" path="res://assets/GLB format/Textures/colormap.png" id="3_fhie6"]
 [ext_resource type="Texture2D" uid="uid://4ywaqy8nyqpe" path="res://assets/turrets/characters/Textures/colormap.png" id="4_qwhqj"]
 [ext_resource type="Texture2D" uid="uid://dw4yc4esd6r6v" path="res://assets/turrets/bow/simple_low_poly_bow_0.png" id="5_rxtwn"]
 [ext_resource type="Animation" uid="uid://b732jufkglera" path="res://assets/turrets/characters/animations/idle.res" id="6_wnxww"]
