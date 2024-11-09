@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm50rd1v5rq3u"]
+
+[ext_resource type="PackedScene" uid="uid://l7dx30ue6d43" path="res://scenes/ui/turret_info/turrent_info.tscn" id="1_vh2ru"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_iulw8"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xntt5"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_do7hs"]
+resource_local_to_scene = true
+transparency = 1
+albedo_texture = SubResource("ViewportTexture_xntt5")
+
+[node name="InfoPopup" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_iulw8")
+surface_material_override/0 = SubResource("StandardMaterial3D_do7hs")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="TurretInfo" parent="SubViewport" instance=ExtResource("1_vh2ru")]

@@ -21,7 +21,6 @@ collision_layer = 0
 scene = ExtResource("2_feox6")
 viewport_size = Vector2(300, 150)
 transparent = 0
-scene_properties_keys = PackedStringArray()
 
 [node name="Viewport2Din3D" parent="." instance=ExtResource("1_hhevy")]
 transform = Transform3D(1, 0, 0, 0, 1, -8.35189e-23, 0, -8.35188e-23, 1, 0, 0, 0.076)

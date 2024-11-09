@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TurretStatsResource" load_steps=2 format=3 uid="uid://glrujd3jh1b1"]
+
+[ext_resource type="Script" path="res://scenes/elements/Turrets/stats/turret_stats.gd" id="1_t086b"]
+
+[resource]
+script = ExtResource("1_t086b")
+turret_level = 1
+cost = 50
+shot_coldown = 2.0
+shot_damage = 30
+shot_range = 6.0
