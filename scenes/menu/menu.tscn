@@ -89,26 +89,26 @@ environment = SubResource("Environment_fcxcl")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="4"]
 transform = Transform3D(0.5, 0.75, -0.433013, 0, 0.5, 0.866025, 0.866025, -0.433013, 0.25, 0, 4, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="5" node_paths=PackedStringArray("y_reference")]
+[node name="MenuBoard" type="MeshInstance3D" parent="." index="5" node_paths=PackedStringArray("y_reference")]
 transform = Transform3D(1, 0, 0, 0, 0.985958, 0.166992, 0, -0.166992, 0.985958, 0, 2.208, -0.7)
 mesh = SubResource("BoxMesh_6p2b7")
 surface_material_override/0 = SubResource("StandardMaterial3D_saest")
 script = ExtResource("6_bnc5x")
 y_reference = NodePath("../XROrigin3D/XRCamera3D")
 
-[node name="TutorialButton" parent="MeshInstance3D" index="0" instance=ExtResource("6_aljis")]
+[node name="TutorialButton" parent="MenuBoard" index="0" instance=ExtResource("6_aljis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.1)
 size = Vector3(0.5, 0.15, 0.1)
 text = "Tutorial"
 font_size = 60
 
-[node name="PlayButton" parent="MeshInstance3D" index="1" instance=ExtResource("6_aljis")]
+[node name="PlayButton" parent="MenuBoard" index="1" instance=ExtResource("6_aljis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
 size = Vector3(0.5, 0.15, 0.1)
 text = "Play"
 font_size = 60
 
-[node name="ExitButton" parent="MeshInstance3D" index="2" instance=ExtResource("6_aljis")]
+[node name="ExitButton" parent="MenuBoard" index="2" instance=ExtResource("6_aljis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0.1)
 size = Vector3(0.5, 0.15, 0.1)
 text = "Exit"
