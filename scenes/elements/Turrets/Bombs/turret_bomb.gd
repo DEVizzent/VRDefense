@@ -11,8 +11,13 @@ func _ready() -> void:
 	super._ready()
 	animation_player.animation_finished.connect(run_next_animation)
 
+func update_stats() -> void:
+	super.update_stats()
+	for bomb:MinionBomb in $BombsPool.get_children():
+		bomb.set_stats(stats)
+
 func activate_player_control(xr_origin: XROrigin3D) -> void:
-	$Timer.stop()
+	timer.stop()
 	xr_origin.position = global_position + Vector3(0, 2, 0)
 	xr_origin.rotation.y = character_soldier.rotation.y + deg_to_rad(180.0)
 	xr_origin.add_child(belt_scene.instantiate())
@@ -28,7 +33,7 @@ func activate_player_control(xr_origin: XROrigin3D) -> void:
 	character_soldier.set_process(false)
 
 func deactivate_player_control() -> void:
-	$Timer.start()
+	timer.start()
 	CommandBus.exit_turret.disconnect(deactivate_player_control)
 	player_control = false
 	character_soldier.visible = true

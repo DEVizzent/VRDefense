@@ -1,4 +1,5 @@
 extends Node3D
+class_name Bomb
 
 signal explosion_finished()
 
@@ -6,11 +7,15 @@ signal explosion_finished()
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var on_fire_particle : CPUParticles3D = $CPUParticles3D
 @onready var sound: AudioStreamPlayer3D = $Sound
+var stats : TurretBombStatsResource
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	timer.timeout.connect(explosion)
 	animation_player.animation_finished.connect(check_explosion_finished)
+
+func set_stats(new_stats: TurretBombStatsResource) -> void:
+	stats = new_stats
 
 func set_fire() -> void:
 	if not timer.is_stopped():

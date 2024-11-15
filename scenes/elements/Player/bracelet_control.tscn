@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckoaattewl5pp"]
+[gd_scene load_steps=7 format=3 uid="uid://ckoaattewl5pp"]
 
+[ext_resource type="Script" path="res://scenes/elements/Player/bracelet_control.gd" id="1_8af0q"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="1_hhevy"]
 [ext_resource type="PackedScene" uid="uid://bsp1xc1ors4jg" path="res://scenes/ui/info_panel/info_panel_2d.tscn" id="2_feox6"]
 [ext_resource type="PackedScene" uid="uid://cks2h3tbw520e" path="res://scenes/ui/turret_panel/turret_panel.tscn" id="3_8og0u"]
+[ext_resource type="PackedScene" uid="uid://cm50rd1v5rq3u" path="res://scenes/ui/info_popup.tscn" id="5_36qwy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_b31sd"]
 size = Vector3(0.35, 0.15, 0.15)
 
 [node name="BraceletControl" type="Node3D"]
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, -0.15)
+script = ExtResource("1_8af0q")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_b31sd")
@@ -29,3 +32,7 @@ collision_layer = 5242880
 scene = ExtResource("3_8og0u")
 viewport_size = Vector2(300, 150)
 scene_properties_keys = PackedStringArray("turret_panel.gd")
+
+[node name="InfoPopup" parent="." instance=ExtResource("5_36qwy")]
+transform = Transform3D(0.3, 1.75687e-09, 6.55671e-09, 1.75686e-09, 0.259808, -0.15, -6.55671e-09, 0.15, 0.259808, -1.49012e-08, 0.2, 0.14)
+visible = false

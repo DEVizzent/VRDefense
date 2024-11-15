@@ -5,6 +5,10 @@ class_name TurretManager
 	preload("res://scenes/elements/Turrets/Bow/turret_bow.tscn"),
 	preload("res://scenes/elements/Turrets/Bombs/turret_bomb.tscn")
 ]
+var turret_stats_by_type: Array[TurretStatsResource] = [
+	load("res://scenes/elements/Turrets/Bow/stats/bow1.tres"),
+	load("res://scenes/elements/Turrets/Bombs/stats/bomb1.tres")
+]
 var has_selected := false
 var active_turret_type : AbstractTurret.Type
 @export var xr_origin: XROrigin3D
@@ -23,6 +27,7 @@ func _on_build_turret(turret_position: Vector3) -> void:
 	if (GameInfo.gears_amount < 50 or not has_selected):
 		return
 	var turret_instance: AbstractTurret = turret_types_scenes[active_turret_type].instantiate()
+	turret_instance.set_stats(turret_stats_by_type[active_turret_type])
 	add_child(turret_instance)
 	EventBus.send_turret_built(50, turret_position)
 	turret_instance.global_position = turret_position + Vector3.UP

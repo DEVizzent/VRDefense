@@ -1,8 +1,12 @@
 extends CenterContainer
 
-@export var turret_stats : TurretStatsResource = load("res://scenes/elements/Turrets/stats/example_turret.tres")
+var turret_stats : TurretStatsResource
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+
+func update_content() -> void:
 	$VBoxContainer/Title.text = turret_stats.getName()
 	$VBoxContainer/Description.text = turret_stats.getDescription()
+	
+func set_turret_stats(stats : TurretStatsResource)-> void:
+	turret_stats = stats
+	update_content()

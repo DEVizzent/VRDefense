@@ -2065,7 +2065,7 @@ projectile_scene = ExtResource("2_hncf1")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="AreaShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_s4u2l")
 

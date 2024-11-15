@@ -10,11 +10,13 @@ func _ready() -> void:
 	super._ready()
 
 func activate_player_control(xr_origin: XROrigin3D) -> void:
-	$Timer.stop()
+	timer.stop()
 	xr_origin.position = global_position + Vector3(0, 2, 0)
 	xr_origin.rotation.y = character_soldier.rotation.y + deg_to_rad(180)
 	var main_hand : XRController3D = xr_origin.find_child(UserSettings.get_main_hand())
-	main_hand.add_child(xr_arrow_hand.instantiate())
+	var xr_arrow_hand_instance : XRArrowHand = xr_arrow_hand.instantiate()
+	xr_arrow_hand_instance.set_stat(stats)
+	main_hand.add_child(xr_arrow_hand_instance)
 	var head : XRCamera3D = xr_origin.find_child("XRCamera3D")
 	head.add_child(xr_quiver.instantiate())
 	var off_hand : XRController3D = xr_origin.find_child(UserSettings.get_off_hand())
@@ -25,7 +27,7 @@ func activate_player_control(xr_origin: XROrigin3D) -> void:
 	character_soldier.set_process(false)
 
 func deactivate_player_control() -> void:
-	$Timer.start()
+	timer.start()
 	CommandBus.exit_turret.disconnect(deactivate_player_control)
 	player_control = false
 	character_soldier.visible = true
@@ -43,6 +45,7 @@ func idle() -> void:
 	
 func invoke_arrow() -> void:
 	var projectile:Arrow = projectile_scene.instantiate()
+	projectile.set_damage(stats.shot_damage)
 	character_soldier.look_at(enemies_in_range.front().global_position + Vector3.UP, Vector3.UP)
 	character_soldier.rotate_object_local(Vector3.UP, PI)
 	character_soldier.add_child(projectile)

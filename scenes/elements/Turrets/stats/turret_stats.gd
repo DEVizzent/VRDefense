@@ -9,7 +9,7 @@ var turret_name: String = 'ExampleTurret'
 @export var shot_range: float
 
 func getName() -> String:
-	return turret_name + ' ' + tr('lvl') + str(turret_level)
+	return turret_name + ' (' + tr('lvl ') + str(turret_level) + ')'
 
 func getDescription() -> String:
 	var description = tr('Cost: ') + str(cost) + '\n'

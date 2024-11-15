@@ -5,8 +5,12 @@ enum ControlContext { TURRET, MAP }
 
 var _controller: XRController3D
 var _context : ControlContext = ControlContext.MAP
+var menu_button_long_press_timer : Timer
 
 func _ready() -> void:
+	menu_button_long_press_timer = Timer.new()
+	add_child(menu_button_long_press_timer)
+	menu_button_long_press_timer.timeout.connect(center_player)
 	DK.print_fixed("XROnTurretControls ready")
 	_controller = XRHelpers.get_xr_controller(self)
 	if _controller:
@@ -21,18 +25,24 @@ func _ready() -> void:
 func _on_button_pressed(p_button : String) -> void:
 	match p_button:
 		"select_button":
-			DK.print_fixed("Select button pressed")
+			DK.print_fixed("Meta button pressed")
 			get_tree().paused = not get_tree().paused
 		"menu_button":
-			DK.print_fixed("Menu button pressed")
-			get_tree().paused = not get_tree().paused
+			DK.print_fixed("Option button pressed")
+			menu_button_long_press_timer.start(1.0)
 		"by_button":
 			if _context == ControlContext.TURRET:
 				CommandBus.command_exit_turret()
 
-func _on_button_released(_p_button : String) -> void:
-	pass
+func _on_button_released(p_button : String) -> void:
+	match p_button:
+		"menu_button":
+			DK.print_fixed("Option button released")
+			menu_button_long_press_timer.stop()
+			
 
+func center_player() -> void:
+	XRServer.center_on_hmd(XRServer.RESET_BUT_KEEP_TILT, true)
 
 func exit_turret() -> void:
 	_context = ControlContext.MAP

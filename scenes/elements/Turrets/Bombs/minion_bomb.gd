@@ -1,8 +1,10 @@
 extends Area3D
+class_name MinionBomb
 
-@onready var bomb: Node3D = $Bomb
+@onready var bomb: Bomb = $Bomb
 var is_thrown: bool = false
 var speed_3d: Vector3 = Vector3(0, 0, 0)
+var stats: TurretBombStatsResource
 @export var speed: float = 20.0
 
 # Called when the node enters the scene tree for the first time.
@@ -10,7 +12,8 @@ func _ready() -> void:
 	area_entered.connect(explosion)
 	body_entered.connect(explosion)
 	bomb.explosion_finished.connect(back_to_origin_position)
-
+func set_stats(stats) -> void:
+	bomb.set_stats(stats)
 func _physics_process(delta: float) -> void:
 	if not is_thrown: 
 		return

@@ -1,18 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://l7dx30ue6d43"]
 
 [ext_resource type="Script" path="res://scenes/ui/turret_info/turrent_info.gd" id="1_bndak"]
-[ext_resource type="Resource" uid="uid://glrujd3jh1b1" path="res://scenes/elements/Turrets/stats/example_turret.tres" id="2_5peim"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jipk6"]
-font_size = 20
+font_size = 35
 outline_size = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_fxpap"]
+font_size = 25
 
 [node name="TurretInfo" type="CenterContainer"]
 custom_minimum_size = Vector2(400, 400)
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_bndak")
-turret_stats = ExtResource("2_5peim")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -28,3 +29,4 @@ text = "Cost: 50
 Shots per second: 0.5
 Damage per shot: 30
 Range: 6"
+label_settings = SubResource("LabelSettings_fxpap")

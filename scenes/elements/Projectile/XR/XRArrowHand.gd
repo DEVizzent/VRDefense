@@ -8,6 +8,7 @@ class_name XRArrowHand
 
 
 var arrow_scene: PackedScene = preload("res://scenes/elements/Projectile/arrow.tscn")
+var stats : TurretBowStatsResource
 var _projectile_manager: Node3D
 var current_arrow: Projectile
 var current_bow: Node3D
@@ -15,8 +16,12 @@ var active_button_action : String = "trigger_click"
 var _controller: XRController3D
 var is_in_quiver_zone: bool = false
 		
+func set_stat(turret_stats : TurretBowStatsResource) -> void:
+	stats = turret_stats
 
 func _ready() -> void:
+	if not stats:
+		push_error("No stats on the XRArrowHand, call set_stat before add_child")
 	_projectile_manager = get_tree().get_first_node_in_group("projectile_manager")
 	if not _projectile_manager:
 		push_error("No projectile manager found in the scene")
@@ -57,6 +62,7 @@ func create_arrow() -> void:
 	if _projectile_manager.get_children().size() >= 10:
 		return
 	current_arrow = arrow_scene.instantiate()
+	current_arrow.set_damage(stats.shot_damage)
 	_projectile_manager.add_child(current_arrow)
 	EventBus.send_arrow_created()
 

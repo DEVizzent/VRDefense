@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TurretBombStatsResource" load_steps=2 format=3 uid="uid://bhfipxx3j4yed"]
+
+[ext_resource type="Script" path="res://scenes/elements/Turrets/Bombs/stats/turret_bomb_stats_resource.gd" id="1_o7ppf"]
+
+[resource]
+script = ExtResource("1_o7ppf")
+shot_area = 6.0
+turret_level = 1
+cost = 60
+shot_coldown = 3.0
+shot_damage = 100
+shot_range = 10.0
