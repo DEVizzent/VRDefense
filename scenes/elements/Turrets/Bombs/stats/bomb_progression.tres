@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="TurretProgressionResource" load_steps=7 format=3 uid="uid://blb8x63y1q8jy"]
+
+[ext_resource type="Script" path="res://scenes/elements/Turrets/stats/turret_progression.gd" id="1_w2eb3"]
+[ext_resource type="Script" path="res://scenes/elements/Turrets/stats/turret_stats.gd" id="2_ac7gp"]
+[ext_resource type="Script" path="res://scenes/elements/Turrets/Bombs/stats/turret_bomb_stats_resource.gd" id="3_wcy0w"]
+
+[sub_resource type="Resource" id="Resource_jc5gp"]
+script = ExtResource("3_wcy0w")
+shot_area = 6.0
+turret_level = 1
+cost = 60
+shot_coldown = 3.0
+shot_damage = 20
+shot_range = 8.0
+
+[sub_resource type="Resource" id="Resource_dtxjt"]
+script = ExtResource("3_wcy0w")
+shot_area = 6.0
+turret_level = 2
+cost = 30
+shot_coldown = 2.8
+shot_damage = 30
+shot_range = 8.5
+
+[sub_resource type="Resource" id="Resource_jtmxm"]
+script = ExtResource("3_wcy0w")
+shot_area = 7.0
+turret_level = 3
+cost = 40
+shot_coldown = 2.6
+shot_damage = 30
+shot_range = 9.0
+
+[resource]
+script = ExtResource("1_w2eb3")
+stats_progression = Array[ExtResource("2_ac7gp")]([SubResource("Resource_jc5gp"), SubResource("Resource_dtxjt"), SubResource("Resource_jtmxm")])

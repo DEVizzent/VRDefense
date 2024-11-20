@@ -2,19 +2,21 @@ extends AbstractTurret
 
 var fire_point_scene : PackedScene = preload("res://scenes/elements/Projectile/XR/xr_fire_point.tscn")
 var belt_scene : PackedScene = preload("res://scenes/elements/Turrets/Bombs/bomber_belt.tscn")
+var preload_stats_progresion: TurretProgressionResource = preload("res://scenes/elements/Turrets/Bombs/stats/bomb_progression.tres")
 @onready var character_soldier: Node3D = $"character-soldier"
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animated_bomb: Node3D = $"character-soldier/AnimatedBomb"
 @onready var bombs_pool: Node3D = $BombsPool
 
 func _ready() -> void:
+	stats_progresion = preload_stats_progresion.stats_progression
 	super._ready()
 	animation_player.animation_finished.connect(run_next_animation)
 
 func update_stats() -> void:
 	super.update_stats()
 	for bomb:MinionBomb in $BombsPool.get_children():
-		bomb.set_stats(stats)
+		bomb.set_stats(stats_progresion[stats_level])
 
 func activate_player_control(xr_origin: XROrigin3D) -> void:
 	timer.stop()

@@ -21,6 +21,9 @@ var ignore_next_entered:bool = false
 @export var selected : PackedScene = load("res://scenes/ui/pointer/selection.tscn")
 var selected_instance : Node3D
 
+signal cell_hovered(hover_position: Vector3, cellItemType : CellItem)
+signal cell_unhovered(unhover_position: Vector3)
+
 func _ready() -> void:
 	selected_instance = selected.instantiate()
 	selected_instance.visible = false
@@ -82,6 +85,7 @@ func _hover_cell() -> void:
 	set_cell_item(hover_position, CellItem.HOVER_EMPTY if index == CellItem.EMPTY else CellItem.HOVER_BUILT)
 	ignore_next_entered = true
 	ignore_next_exited = true
+	cell_hovered.emit(map_to_local(hover_position), index)
 	
 func _unhover_cell(force:bool) -> void:
 	var index : int = get_cell_item(last_hover_position)
@@ -91,6 +95,7 @@ func _unhover_cell(force:bool) -> void:
 		return
 	selected_instance.visible = false
 	set_cell_item(last_hover_position, hover_previous_index)
+	cell_unhovered.emit(map_to_local(hover_position))
 	
 func _on_turret_built(_cost:int, turret_position: Vector3) -> void:
 	set_cell_item(local_to_map(turret_position), CellItem.BUILT)

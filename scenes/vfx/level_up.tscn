@@ -1,0 +1,109 @@
+[gd_scene load_steps=22 format=3 uid="uid://bruyludgihcax"]
+
+[ext_resource type="Shader" path="res://level_up_aura.gdshader" id="1_h440k"]
+[ext_resource type="Script" path="res://scenes/vfx/emitter.gd" id="1_mtkl7"]
+[ext_resource type="ArrayMesh" uid="uid://vu0i3bc7mpq2" path="res://assets/VFX/sm_cylinder1.obj" id="2_g64j6"]
+[ext_resource type="Texture2D" uid="uid://d0ktts8ggumo2" path="res://assets/VFX/T_Aurax12.jpg" id="3_2fkeq"]
+[ext_resource type="Texture2D" uid="uid://chrfnvklnor4m" path="res://assets/VFX/T_disort_test2.PNG" id="5_hc2tu"]
+
+[sub_resource type="Gradient" id="Gradient_c86tu"]
+offsets = PackedFloat32Array(0, 0.974249, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4r75j"]
+gradient = SubResource("Gradient_c86tu")
+fill_from = Vector2(1, 0.00854701)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gwbgv"]
+render_priority = 0
+shader = ExtResource("1_h440k")
+shader_parameter/speed = Vector2(0.8, 1.2)
+shader_parameter/alpha_gradient = SubResource("GradientTexture2D_4r75j")
+shader_parameter/noise = ExtResource("3_2fkeq")
+
+[sub_resource type="Curve" id="Curve_6a5pb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.228916, 1), 0.0, 0.0, 0, 0, Vector2(0.987952, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_mjv1i"]
+curve = SubResource("Curve_6a5pb")
+
+[sub_resource type="Curve" id="Curve_dli0s"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_7jj42"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_s65c7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_txhjm"]
+curve_x = SubResource("Curve_dli0s")
+curve_y = SubResource("Curve_7jj42")
+curve_z = SubResource("Curve_s65c7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tbmov"]
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveXYZTexture_txhjm")
+color = Color(2.5, 2, 0.5, 1)
+alpha_curve = SubResource("CurveTexture_mjv1i")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_we5ao"]
+render_priority = 0
+shader = ExtResource("1_h440k")
+shader_parameter/speed = Vector2(-1.2, 0.8)
+shader_parameter/alpha_gradient = SubResource("GradientTexture2D_4r75j")
+shader_parameter/noise = ExtResource("5_hc2tu")
+
+[sub_resource type="Curve" id="Curve_cstyr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_nxwqm"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_p7t7p"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_irfur"]
+curve_x = SubResource("Curve_cstyr")
+curve_y = SubResource("Curve_nxwqm")
+curve_z = SubResource("Curve_p7t7p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_44jq3"]
+gravity = Vector3(0, 0, 0)
+scale_min = 8.0
+scale_max = 8.0
+scale_curve = SubResource("CurveXYZTexture_irfur")
+color = Color(2.5, 2, 0.5, 1)
+alpha_curve = SubResource("CurveTexture_mjv1i")
+
+[node name="VFX_Level_Up" type="Node3D" node_paths=PackedStringArray("particles")]
+script = ExtResource("1_mtkl7")
+particles = [NodePath("AuraCylinder1"), NodePath("AuraCylinder2")]
+
+[node name="AuraCylinder1" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_gwbgv")
+cast_shadow = 0
+emitting = false
+amount = 1
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_tbmov")
+draw_pass_1 = ExtResource("2_g64j6")
+
+[node name="AuraCylinder2" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_we5ao")
+cast_shadow = 0
+emitting = false
+amount = 1
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_44jq3")
+draw_pass_1 = ExtResource("2_g64j6")

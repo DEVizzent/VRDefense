@@ -13,8 +13,18 @@ func getName() -> String:
 
 func getDescription() -> String:
 	var description = tr('Cost: ') + str(cost) + '\n'
-	description += tr('Shots per second: ') + str(1/shot_coldown) + '\n'
+	description += tr('Shots per second: ') + str(1/shot_coldown).pad_decimals(3) + '\n'
 	description += tr('Damage per shot: ') + str(shot_damage) + '\n'
 	description += tr('Range: ') + str(shot_range)
-	
 	return description
+
+func getComparedName(upgrade : TurretStatsResource) -> String:
+	return turret_name + ' (' + tr('lvl ') + str(turret_level) + ') -> (' + str(upgrade.turret_level) + ')'
+
+func getComparedDescription(upgrade : TurretStatsResource) -> String:
+	var description = tr('Cost: ') + str(upgrade.cost) + '\n'
+	description += tr('Shots per second: ') + str(1/shot_coldown).pad_decimals(3) + ' -> ' + str(1/upgrade.shot_coldown).pad_decimals(3) + '\n'
+	description += tr('Damage per shot: ') + str(shot_damage) + ' -> ' + str(upgrade.shot_damage) + '\n'
+	description += tr('Range: ') + str(shot_range) + ' -> ' + str(upgrade.shot_range)
+	return description
+	

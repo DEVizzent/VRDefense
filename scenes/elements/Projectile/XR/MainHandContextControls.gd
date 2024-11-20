@@ -33,6 +33,9 @@ func _on_button_pressed(p_button : String) -> void:
 		"by_button":
 			if _context == ControlContext.TURRET:
 				CommandBus.command_exit_turret()
+		"ax_button":
+			if _context == ControlContext.MAP:
+				CommandBus.command_upgrade_turret()
 
 func _on_button_released(p_button : String) -> void:
 	match p_button:
