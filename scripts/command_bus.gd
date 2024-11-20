@@ -3,6 +3,7 @@ class_name CommandBusScript
 
 ## Turret managetment
 signal build_turret(turret_position: Vector3)
+signal upgrade_turret()
 signal control_turret(turret_position: Vector3)
 signal exit_turret()
 ## Level Flow
@@ -13,6 +14,9 @@ signal hide_bracelet_info()
 
 func command_build_turret(turret_position: Vector3) -> void:
 	build_turret.emit(turret_position)
+
+func command_upgrade_turret() -> void:
+	upgrade_turret.emit()
 
 func command_control_turret(turret_position: Vector3) -> void:
 	control_turret.emit(turret_position)

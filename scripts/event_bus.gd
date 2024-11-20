@@ -14,6 +14,7 @@ signal round_finished()
 signal level_finished()
 
 signal turret_built(cost: int, turret_position: Vector3)#Next step should be send the turret information
+signal turret_upgrated(upgrated_stats:TurretStatsResource)
 
 signal arrow_created()
 
@@ -31,6 +32,9 @@ func send_gears_updated(amount: int) -> void:
 
 func send_turret_built(cost: int, turret_position: Vector3) -> void:
 	turret_built.emit(cost, turret_position)
+
+func send_turret_upgraded(upgrated_stats:TurretStatsResource) -> void:
+	turret_upgrated.emit(upgrated_stats)
 
 func send_turret_type_selected(turret_type: AbstractTurret.Type) -> void:
 	turret_type_selected.emit(turret_type)
