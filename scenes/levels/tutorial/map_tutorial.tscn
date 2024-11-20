@@ -50,7 +50,7 @@ curve = SubResource("Curve3D_o7ued")
 script = ExtResource("4_jv4tc")
 time_betweent_rounds = -1.0
 enemy_scene = ExtResource("5_221f0")
-round_collection = Array[ExtResource("6_mpdx3")]([ExtResource("7_ycyqh"), ExtResource("7_ycyqh"), ExtResource("7_ycyqh")])
+round_collection = Array[ExtResource("6_mpdx3")]([ExtResource("7_ycyqh"), ExtResource("7_ycyqh"), ExtResource("7_ycyqh"), ExtResource("7_ycyqh")])
 
 [node name="Timer" type="Timer" parent="SpawnerPath3D"]
 wait_time = 3.0

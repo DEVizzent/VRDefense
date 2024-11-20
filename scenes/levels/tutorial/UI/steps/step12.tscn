@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://hv7gah71uckg"]
+[gd_scene load_steps=2 format=3 uid="uid://cug5ray1oivha"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wm4n3"]
 bg_color = Color(0.480469, 0.480469, 0.480469, 1)
@@ -25,7 +25,7 @@ custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 75
 bbcode_enabled = true
-text = "[center] Point to one of the turrets to see the stats of the turret and click on [img=100]res://assets/icons/inputs/button_a.svg[/img] to upgrade the turret [/center]"
+text = "[center]CONGRATULATIONS!! [/center]"
 fit_content = true
 scroll_active = false
 threaded = true

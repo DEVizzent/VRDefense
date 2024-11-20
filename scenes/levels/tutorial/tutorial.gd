@@ -16,12 +16,18 @@ var step_scenes: Array[PackedScene] = [
 	load("res://scenes/levels/tutorial/UI/steps/step8.tscn"),#10
 	load("res://scenes/levels/tutorial/UI/steps/step9.tscn"),
 	load("res://scenes/levels/tutorial/UI/steps/step5.tscn"),
+	load("res://scenes/levels/tutorial/UI/steps/step6.tscn"),
 	load("res://scenes/levels/tutorial/UI/steps/step10.tscn"),
+	load("res://scenes/levels/tutorial/UI/steps/step11.tscn"),#15
+	load("res://scenes/levels/tutorial/UI/steps/step12.tscn"),
 ]
 var timer : Timer
+var blocked_upgrades : Array[TurretStatsResource]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	disable_turret_progression()
+	
 	MusicController.switch_to_tutorial()
 	EventBus.turret_type_selected.connect(message_build_turret)
 	EventBus.turret_built.connect(start_spawning_enemies)
@@ -36,6 +42,8 @@ func _ready() -> void:
 	CommandBus.control_turret.connect(message_get_a_bomb)
 	EventBus.bomb_grabbed.connect(message_throw_a_bomb)
 	EventBus.bomb_thrown.connect(message_kill_the_goblin)
+	CommandBus.exit_turret.connect(message_update_bow_turret)
+	EventBus.turret_upgrated.connect(message_turret_upgraded)
 	EventBus.level_finished.connect(message_tutorial_completed)
 	tutorial_viewport.set_scene(step_scenes[0])
 
@@ -89,7 +97,7 @@ func message_kill_the_goblin() -> void:
 	CommandBus.command_start_spawner()
 
 func message_exit_turret() -> void:
-	if tutorial_step != 5:
+	if tutorial_step != 5 and tutorial_step != 12:
 		return
 	tutorial_step += 1
 	tutorial_viewport.set_scene(step_scenes[tutorial_step])
@@ -136,8 +144,21 @@ func message_throw_a_bomb() -> void:
 	tutorial_viewport.set_scene(step_scenes[tutorial_step])
 	EventBus.bomb_grabbed.disconnect(message_throw_a_bomb)
 	UISoundController.success()
+func message_update_bow_turret() -> void:
+	if tutorial_step != 13:
+		return
+	enable_turret_progression()
+	tutorial_step += 1
+	tutorial_viewport.set_scene(step_scenes[tutorial_step])
+func message_turret_upgraded(_upgrated_stats:TurretStatsResource) -> void:
+	if tutorial_step != 14:
+		return
+	tutorial_step += 1
+	tutorial_viewport.set_scene(step_scenes[tutorial_step])
+	CommandBus.command_start_spawner()
+	
 func message_tutorial_completed() -> void:
-	if tutorial_step != 12:
+	if tutorial_step != 15:
 		return
 	tutorial_step += 1
 	tutorial_viewport.set_scene(step_scenes[tutorial_step])
@@ -147,3 +168,9 @@ func message_tutorial_completed() -> void:
 func go_back_to_menu() -> void:
 	var scene_base : XRToolsSceneBase = XRTools.find_xr_ancestor(self, "*", "XRToolsSceneBase")
 	scene_base.load_scene("res://scenes/menu/menu.tscn")
+
+func disable_turret_progression() -> void:
+	$TurretManager.show_popup_info = false
+func enable_turret_progression() -> void:
+	$TurretManager.show_popup_info = true
+	

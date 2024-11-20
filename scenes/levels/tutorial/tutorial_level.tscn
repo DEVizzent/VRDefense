@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ci5g5y8vuyqmr"]
+[gd_scene load_steps=13 format=3 uid="uid://ci5g5y8vuyqmr"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_eqnyl"]
 [ext_resource type="Script" path="res://scenes/levels/tutorial/tutorial.gd" id="2_xs7nu"]
@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://ckoaattewl5pp" path="res://scenes/elements/Player/bracelet_control.tscn" id="6_8i2mb"]
 [ext_resource type="Script" path="res://scenes/elements/Projectile/XR/MainHandContextControls.gd" id="7_0htks"]
 [ext_resource type="PackedScene" uid="uid://bheh0hjms8jdt" path="res://scenes/levels/tutorial/map_tutorial.tscn" id="8_148md"]
+[ext_resource type="PackedScene" uid="uid://cm50rd1v5rq3u" path="res://scenes/ui/info_popup.tscn" id="9_4ennx"]
 [ext_resource type="Script" path="res://nodes/turret_manager.gd" id="9_auihd"]
+[ext_resource type="PackedScene" uid="uid://bruyludgihcax" path="res://scenes/vfx/level_up.tscn" id="10_tno5o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_023us"]
 albedo_color = Color(1, 0.772549, 0, 1)
@@ -54,8 +56,18 @@ script = ExtResource("7_0htks")
 
 [node name="Map" parent="." index="2" instance=ExtResource("8_148md")]
 
-[node name="TurretManager" type="Node3D" parent="." index="3" node_paths=PackedStringArray("xr_origin")]
+[node name="TurretManager" type="Node3D" parent="." index="3" node_paths=PackedStringArray("xr_grid_map", "xr_origin")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.42, 0)
 script = ExtResource("9_auihd")
+xr_grid_map = NodePath("../Map/GridMap")
 xr_origin = NodePath("../XROrigin3D")
 
+[node name="InfoPopup" parent="TurretManager" index="0" instance=ExtResource("9_4ennx")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+visible = false
+
+[node name="VFX_Level_Up" parent="TurretManager" index="1" instance=ExtResource("10_tno5o")]
+
 [node name="ProjectileManager" type="Node3D" parent="." index="4" groups=["projectile_manager"]]
+
+[editable path="Map"]
