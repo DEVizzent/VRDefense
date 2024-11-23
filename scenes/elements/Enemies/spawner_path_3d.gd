@@ -18,6 +18,9 @@ func _ready() -> void:
 	current_round_index = 0
 	current_wave_index = 0
 	next_enemy_index = 0
+	if time_betweent_rounds > 0:
+		await get_tree().create_timer(time_betweent_rounds).timeout
+		start_spawner()
 
 func start_spawner() -> void:
 	timer.timeout.emit()
