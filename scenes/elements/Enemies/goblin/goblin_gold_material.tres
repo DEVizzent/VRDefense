@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://01xih3bewdxb"]
+
+[ext_resource type="Texture2D" uid="uid://cpn72oa3jteeh" path="res://assets/Enemies/Textures/goblin-gold-colormap.png" id="1_77xbj"]
+
+[resource]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("1_77xbj")
+texture_filter = 2
