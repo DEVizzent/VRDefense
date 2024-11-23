@@ -28,6 +28,7 @@ func _ready() -> void:
 func init(stats: EnemyStats) -> void:
 	max_health = stats.health
 	speed = stats.speed
+	reward_gears = stats.reward_gears;
 	_set_colormap_from_stats(stats)
 
 func _set_colormap_from_stats(stats: EnemyStats) -> void:
