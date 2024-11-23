@@ -47,7 +47,7 @@ func _on_control_turret(turret_position: Vector3) -> void:
 			return	
 
 func _on_upgrade_turret() -> void:
-	if GameInfo.gears_amount < active_turret.get_upgrade_cost():
+	if not active_turret or GameInfo.gears_amount < active_turret.get_upgrade_cost():
 		return
 	active_turret.upgrade_turret()
 	vfx_level_up.global_position = active_turret.global_position
