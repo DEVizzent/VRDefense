@@ -1,0 +1,74 @@
+[gd_scene load_steps=13 format=3 uid="uid://dqyl2jwiyddp3"]
+
+[ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_gupwh"]
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="2_71piy"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_jbu5e"]
+[ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="4_fpaw2"]
+[ext_resource type="PackedScene" uid="uid://ckoaattewl5pp" path="res://scenes/elements/Player/bracelet_control.tscn" id="5_t0t0c"]
+[ext_resource type="Script" path="res://scenes/elements/Projectile/XR/MainHandContextControls.gd" id="6_yrnvc"]
+[ext_resource type="PackedScene" uid="uid://bs3144ct184g1" path="res://scenes/levels/world1/level1/map.tscn" id="7_03qlq"]
+[ext_resource type="Script" path="res://nodes/turret_manager.gd" id="8_uhtfh"]
+[ext_resource type="PackedScene" uid="uid://cm50rd1v5rq3u" path="res://scenes/ui/info_popup.tscn" id="9_cxa4m"]
+[ext_resource type="PackedScene" uid="uid://bruyludgihcax" path="res://scenes/vfx/level_up.tscn" id="10_6xbgb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_023us"]
+albedo_color = Color(1, 0.772549, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_81ejm"]
+albedo_color = Color(1, 0.772549, 0, 1)
+
+[node name="SceneBase" instance=ExtResource("1_gupwh")]
+script = ExtResource("2_71piy")
+starting_level_gears = 200
+
+[node name="PlayerOverview" type="Node3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
+
+[node name="XROrigin3D" parent="." index="1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16, 10, 0)
+
+[node name="TutorialViewport" parent="XROrigin3D" index="0" instance=ExtResource("3_jbu5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91968e-07, 1.94427, -4.39172)
+enabled = false
+collision_layer = 0
+viewport_size = Vector2(1200, 600)
+throttle_fps = 1.0
+input_keyboard = false
+
+[node name="FunctionPointer" parent="XROrigin3D/LeftHand" index="0" instance=ExtResource("4_fpaw2")]
+enabled = false
+distance = 50.0
+show_laser = 0
+laser_material = SubResource("StandardMaterial3D_023us")
+show_target = true
+
+[node name="BraceletControl" parent="XROrigin3D/LeftHand" index="1" instance=ExtResource("5_t0t0c")]
+transform = Transform3D(0.422618, -0.906308, -3.9616e-08, 0, -4.37114e-08, 1, -0.906308, -0.422618, -1.84732e-08, -0.06, -0.05, 0.25)
+
+[node name="MainHandContextControls" type="Node" parent="XROrigin3D/LeftHand" index="2"]
+script = ExtResource("6_yrnvc")
+
+[node name="FunctionPointer" parent="XROrigin3D/RightHand" index="0" instance=ExtResource("4_fpaw2")]
+distance = 50.0
+laser_material = SubResource("StandardMaterial3D_81ejm")
+
+[node name="MainHandContextControls" type="Node" parent="XROrigin3D/RightHand" index="1"]
+script = ExtResource("6_yrnvc")
+
+[node name="Map" parent="." index="2" instance=ExtResource("7_03qlq")]
+
+[node name="TurretManager" type="Node3D" parent="." index="3" node_paths=PackedStringArray("xr_grid_map", "xr_origin")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.42, 0)
+script = ExtResource("8_uhtfh")
+xr_grid_map = NodePath("../Map/GridMap")
+xr_origin = NodePath("../XROrigin3D")
+
+[node name="InfoPopup" parent="TurretManager" index="0" instance=ExtResource("9_cxa4m")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+visible = false
+
+[node name="VFX_Level_Up" parent="TurretManager" index="1" instance=ExtResource("10_6xbgb")]
+
+[node name="ProjectileManager" type="Node3D" parent="." index="4" groups=["projectile_manager"]]
+
+[editable path="Map"]

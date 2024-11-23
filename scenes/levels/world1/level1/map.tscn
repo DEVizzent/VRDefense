@@ -1,0 +1,180 @@
+[gd_scene load_steps=35 format=3 uid="uid://bs3144ct184g1"]
+
+[ext_resource type="MeshLibrary" uid="uid://bgknys2lv5gps" path="res://mesh_libraries/SpaceLibrary.tres" id="1_mxg50"]
+[ext_resource type="Script" path="res://nodes/xr_pointable_grid_map.gd" id="2_jbfaq"]
+[ext_resource type="PackedScene" uid="uid://br6uco4m0pijp" path="res://scenes/elements/base.tscn" id="3_hlvug"]
+[ext_resource type="Script" path="res://scenes/elements/enemies/spawner_path_3d.gd" id="4_cvs0n"]
+[ext_resource type="PackedScene" uid="uid://bdgeptrlnytvr" path="res://scenes/elements/enemies/enemy.tscn" id="5_1klvi"]
+[ext_resource type="Script" path="res://scenes/elements/waves/round.gd" id="6_gtm44"]
+[ext_resource type="Script" path="res://scenes/elements/waves/wave.gd" id="7_326r5"]
+[ext_resource type="Script" path="res://scenes/elements/waves/enemy_resource.gd" id="8_vk5w8"]
+[ext_resource type="Resource" uid="uid://ndrgb57thq8q" path="res://scenes/elements/enemies/goblin/resource/goblin_weak_resource.tres" id="9_cne07"]
+[ext_resource type="Resource" uid="uid://ck5ag5i07cd12" path="res://scenes/elements/enemies/goblin/resource/goblin_gold_resource.tres" id="10_er0gb"]
+[ext_resource type="Resource" uid="uid://d2nb1qmiedb3r" path="res://scenes/elements/enemies/goblin/resource/goblin_resource.tres" id="11_spv3w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ahee"]
+shading_mode = 2
+albedo_color = Color(0.392157, 0.827451, 0.580392, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_o7ued"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 5, 0, 23, 1, 0, 2, -1, 0, -2, 6, 0, -12, 1, 0, -2, -1, 0, 2, -1, 0, -12, 2, 0, -2, -2, 0, 2, -2, 0, 10, 2.30233, 0, -0.335011, -2.30233, 0, 0.335011, -7, 0, 11),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="Resource" id="Resource_7rvnn"]
+script = ExtResource("7_326r5")
+duration = 12.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07")])
+rest_time = 6.0
+
+[sub_resource type="Resource" id="Resource_6jbba"]
+script = ExtResource("7_326r5")
+duration = 8.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07")])
+rest_time = 6.0
+
+[sub_resource type="Resource" id="Resource_svmjf"]
+script = ExtResource("7_326r5")
+duration = 6.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("10_er0gb")])
+rest_time = 8.0
+
+[sub_resource type="Resource" id="Resource_ai85g"]
+script = ExtResource("7_326r5")
+duration = 4.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07")])
+rest_time = 1.0
+
+[sub_resource type="Resource" id="Resource_5swkb"]
+script = ExtResource("6_gtm44")
+waves = Array[ExtResource("7_326r5")]([SubResource("Resource_7rvnn"), SubResource("Resource_6jbba"), SubResource("Resource_svmjf"), SubResource("Resource_ai85g")])
+
+[sub_resource type="Resource" id="Resource_fk28h"]
+script = ExtResource("7_326r5")
+duration = 8.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07")])
+rest_time = 6.0
+
+[sub_resource type="Resource" id="Resource_u32po"]
+script = ExtResource("7_326r5")
+duration = 6.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07")])
+rest_time = 6.0
+
+[sub_resource type="Resource" id="Resource_miehj"]
+script = ExtResource("7_326r5")
+duration = 4.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("10_er0gb")])
+rest_time = 8.0
+
+[sub_resource type="Resource" id="Resource_em6cx"]
+script = ExtResource("7_326r5")
+duration = 2.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07")])
+rest_time = 1.0
+
+[sub_resource type="Resource" id="Resource_hoh65"]
+script = ExtResource("6_gtm44")
+waves = Array[ExtResource("7_326r5")]([SubResource("Resource_fk28h"), SubResource("Resource_u32po"), SubResource("Resource_miehj"), SubResource("Resource_em6cx")])
+
+[sub_resource type="Resource" id="Resource_3rkxs"]
+script = ExtResource("7_326r5")
+duration = 4.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("11_spv3w"), ExtResource("11_spv3w")])
+rest_time = 6.0
+
+[sub_resource type="Resource" id="Resource_ffgr5"]
+script = ExtResource("7_326r5")
+duration = 10.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("11_spv3w"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("11_spv3w")])
+rest_time = 10.0
+
+[sub_resource type="Resource" id="Resource_e6hul"]
+script = ExtResource("7_326r5")
+duration = 10.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07")])
+rest_time = 1.0
+
+[sub_resource type="Resource" id="Resource_ni0do"]
+script = ExtResource("7_326r5")
+duration = 7.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("10_er0gb")])
+rest_time = 1.0
+
+[sub_resource type="Resource" id="Resource_dmgw8"]
+script = ExtResource("6_gtm44")
+waves = Array[ExtResource("7_326r5")]([SubResource("Resource_3rkxs"), SubResource("Resource_ffgr5"), SubResource("Resource_e6hul"), SubResource("Resource_ni0do")])
+
+[sub_resource type="Resource" id="Resource_1s608"]
+script = ExtResource("7_326r5")
+duration = 4.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("11_spv3w"), ExtResource("11_spv3w")])
+rest_time = 4.0
+
+[sub_resource type="Resource" id="Resource_7t7s3"]
+script = ExtResource("7_326r5")
+duration = 10.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("11_spv3w"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("11_spv3w")])
+rest_time = 5.0
+
+[sub_resource type="Resource" id="Resource_l0sl2"]
+script = ExtResource("7_326r5")
+duration = 10.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07")])
+rest_time = 1.0
+
+[sub_resource type="Resource" id="Resource_cbm51"]
+script = ExtResource("7_326r5")
+duration = 7.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("10_er0gb")])
+rest_time = 1.0
+
+[sub_resource type="Resource" id="Resource_yrm15"]
+script = ExtResource("6_gtm44")
+waves = Array[ExtResource("7_326r5")]([SubResource("Resource_1s608"), SubResource("Resource_7t7s3"), SubResource("Resource_l0sl2"), SubResource("Resource_cbm51")])
+
+[sub_resource type="Environment" id="Environment_ollit"]
+background_mode = 1
+background_color = Color(0.716297, 0.716296, 0.716296, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.601223, 0.601223, 0.601223, 1)
+
+[node name="Map" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(100, 2, 100)
+material = SubResource("StandardMaterial3D_8ahee")
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_mxg50")
+cell_size = Vector3(4, 4, 4)
+cell_center_y = false
+collision_layer = 1048577
+data = {
+"cells": PackedInt32Array(65535, 0, 1, 65535, 65535, 1, 1, 65535, 1, 1, 0, 1, 1, 1, 1, 1, 2, 1, 1, 3, 1, 65535, 1, 1, 65535, 2, 655365, 1, 4, 1, 65534, 2, 1048577, 65535, 65534, 1, 1, 65534, 1, 1, 65533, 1, 65535, 65533, 1, 65535, 65532, 5, 0, 65532, 1441793, 1, 65532, 1441797, 65534, 4, 0, 65535, 4, 0, 0, 4, 0, 0, 3, 0, 65535, 3, 0, 65534, 3, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 65535, 0, 0, 65534, 0, 0, 65533, 0, 65534, 1, 0, 65534, 0, 0, 65534, 65535, 0, 65534, 65534, 0, 65534, 65533, 0, 65534, 65532, 0, 65534, 65531, 0, 65535, 65531, 0, 0, 65531, 0, 1, 65531, 0, 2, 65531, 0, 2, 65532, 0, 2, 65533, 0, 2, 65534, 0, 2, 65535, 0, 2, 0, 0, 2, 1, 0, 2, 2, 0, 2, 3, 0, 2, 4, 0)
+}
+script = ExtResource("2_jbfaq")
+
+[node name="Base" parent="." instance=ExtResource("3_hlvug")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 9.9493)
+
+[node name="SpawnerPath3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_o7ued")
+script = ExtResource("4_cvs0n")
+enemy_scene = ExtResource("5_1klvi")
+round_collection = Array[ExtResource("6_gtm44")]([SubResource("Resource_5swkb"), SubResource("Resource_hoh65"), SubResource("Resource_dmgw8"), SubResource("Resource_yrm15")])
+
+[node name="Timer" type="Timer" parent="SpawnerPath3D"]
+wait_time = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, 1, -1, 4.37114e-08, -4.37114e-08, 0, 26, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ollit")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.5, 0.75, -0.433013, 0, 0.5, 0.866025, 0.866025, -0.433013, 0.25, 0, 4, 0)
