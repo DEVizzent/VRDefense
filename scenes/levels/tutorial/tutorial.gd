@@ -27,6 +27,7 @@ var blocked_upgrades : Array[TurretStatsResource]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	disable_turret_progression()
+	GameInfo.gears_amount = 195
 	
 	MusicController.switch_to_tutorial()
 	EventBus.turret_type_selected.connect(message_build_turret)
