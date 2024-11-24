@@ -56,6 +56,7 @@ func throw_bomb() -> void:
 	animated_bomb.remove_child(bomb)
 	bombs_pool.add_child(bomb)
 	bomb.global_transform = previous_global_transform
+	
 	bomb.throw(-character_soldier.global_transform.basis.z)
 
 func idle() -> void:

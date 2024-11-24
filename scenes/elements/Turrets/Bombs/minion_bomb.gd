@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 	if not is_thrown: 
 		return
 	speed_3d.y -=  9.8 * delta
-	position += speed_3d * delta
+	global_position += speed_3d * delta
 
 func throw(throw_direction: Vector3) -> void:
 	is_thrown = true
