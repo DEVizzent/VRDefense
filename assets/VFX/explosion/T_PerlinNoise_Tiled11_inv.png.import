@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0ktts8ggumo2"
-path.s3tc="res://.godot/imported/T_Aurax12.jpg-00d05ca4bf1bcef4fd2a601b765cb247.s3tc.ctex"
-path.etc2="res://.godot/imported/T_Aurax12.jpg-00d05ca4bf1bcef4fd2a601b765cb247.etc2.ctex"
+uid="uid://dqm8u8dindqjq"
+path.s3tc="res://.godot/imported/T_PerlinNoise_Tiled11_inv.png-9d6d7829adfe02c659f6014e0a08e75e.s3tc.ctex"
+path.etc2="res://.godot/imported/T_PerlinNoise_Tiled11_inv.png-9d6d7829adfe02c659f6014e0a08e75e.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/VFX/T_Aurax12.jpg"
-dest_files=["res://.godot/imported/T_Aurax12.jpg-00d05ca4bf1bcef4fd2a601b765cb247.s3tc.ctex", "res://.godot/imported/T_Aurax12.jpg-00d05ca4bf1bcef4fd2a601b765cb247.etc2.ctex"]
+source_file="res://assets/VFX/explosion/T_PerlinNoise_Tiled11_inv.png"
+dest_files=["res://.godot/imported/T_PerlinNoise_Tiled11_inv.png-9d6d7829adfe02c659f6014e0a08e75e.s3tc.ctex", "res://.godot/imported/T_PerlinNoise_Tiled11_inv.png-9d6d7829adfe02c659f6014e0a08e75e.etc2.ctex"]
 
 [params]
 
