@@ -1,0 +1,38 @@
+[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://bkof82dkbrah8"]
+
+[ext_resource type="Shader" path="res://explosion_cloud.gdshader" id="1_m68lv"]
+[ext_resource type="Texture2D" uid="uid://3b5386s2yo75" path="res://assets/VFX/explosion/T_VFX_Noise_44xainv.png" id="2_x1kpx"]
+[ext_resource type="Texture2D" uid="uid://cuejlbgkpwde3" path="res://assets/VFX/explosion/T_cloudy_noise_211c.png" id="3_45xui"]
+[ext_resource type="Texture2D" uid="uid://bf637l6jcj7au" path="res://assets/VFX/explosion/T_PerlinNoise_46_inv.png" id="4_ldyso"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s7woj"]
+noise_type = 2
+frequency = 0.0031
+fractal_type = 2
+fractal_octaves = 2
+fractal_gain = 2.1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_suxxt"]
+seamless = true
+noise = SubResource("FastNoiseLite_s7woj")
+
+[sub_resource type="Gradient" id="Gradient_ioalx"]
+colors = PackedColorArray(0.105469, 0.105469, 0.105469, 1, 0.839844, 0.659152, 0.377274, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5j0so"]
+gradient = SubResource("Gradient_ioalx")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_m68lv")
+shader_parameter/cloud_speed = 0.25
+shader_parameter/cloud_intensity = 0.25
+shader_parameter/emission_color = Color(1, 0.140625, 0, 1)
+shader_parameter/emission_intensity = 20.0
+shader_parameter/emission_amount = 0.0
+shader_parameter/alpha_amount = 0.0
+shader_parameter/vertex_noise = ExtResource("4_ldyso")
+shader_parameter/cloud_color = ExtResource("3_45xui")
+shader_parameter/gradient = SubResource("GradientTexture1D_5j0so")
+shader_parameter/emission_noise = SubResource("NoiseTexture2D_suxxt")
+shader_parameter/alpha_noise = ExtResource("2_x1kpx")
