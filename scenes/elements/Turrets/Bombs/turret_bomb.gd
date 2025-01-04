@@ -42,10 +42,12 @@ func deactivate_player_control() -> void:
 	character_soldier.set_process(true)
 
 func shoot() -> void:
-	var bomb: Area3D = bombs_pool.get_child(0)
-	bombs_pool.remove_child(bomb)
+	var bomb: Area3D = animated_bomb.get_child(0)
+	if not bomb:
+		bomb = bombs_pool.get_child(0)
+		bombs_pool.remove_child(bomb)
+		animated_bomb.add_child(bomb)
 	bomb.visible = true
-	animated_bomb.add_child(bomb)
 	bomb.position = Vector3.ZERO
 	look_at_enemy()
 	animation_player.play("pick-up-bomb")
@@ -56,7 +58,6 @@ func throw_bomb() -> void:
 	animated_bomb.remove_child(bomb)
 	bombs_pool.add_child(bomb)
 	bomb.global_transform = previous_global_transform
-	
 	bomb.throw(-character_soldier.global_transform.basis.z)
 
 func idle() -> void:

@@ -2,7 +2,7 @@ extends TurretStatsResource
 class_name TurretBombStatsResource
 
 @export var shot_area: float
-func _init():
+func _init() -> void:
 	turret_name = tr('Bomber Turret')
 
 func getDescription() -> String:

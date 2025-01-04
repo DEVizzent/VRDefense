@@ -18,7 +18,6 @@ func _ready() -> void:
 		_controller.button_released.connect(_on_button_released)
 		CommandBus.control_turret.connect(enter_turret_context)
 	else:
-		DK.print_fixed("No XRController3D found in parent nodes")
 		push_error("No XRController3D found in parent nodes")
 	
 
@@ -33,6 +32,12 @@ func _on_button_pressed(p_button : String) -> void:
 		"by_button":
 			if _context == ControlContext.TURRET:
 				CommandBus.command_exit_turret()
+			if _context == ControlContext.MAP:
+				if Engine.time_scale != 1.0:
+					Engine.time_scale = 1.0
+				else:
+					print_debug("Time manipulation")
+					Engine.time_scale = 2.0
 		"ax_button":
 			if _context == ControlContext.MAP:
 				CommandBus.command_upgrade_turret()

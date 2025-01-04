@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://caqkn3isoex11"
 path.s3tc="res://.godot/imported/white-circle.png-781860cfd49f406ac0326fd8c989d829.s3tc.ctex"
+path.etc2="res://.godot/imported/white-circle.png-781860cfd49f406ac0326fd8c989d829.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://scenes/elements/Turrets/Bombs/white-circle.png"
-dest_files=["res://.godot/imported/white-circle.png-781860cfd49f406ac0326fd8c989d829.s3tc.ctex"]
+dest_files=["res://.godot/imported/white-circle.png-781860cfd49f406ac0326fd8c989d829.s3tc.ctex", "res://.godot/imported/white-circle.png-781860cfd49f406ac0326fd8c989d829.etc2.ctex"]
 
 [params]
 
