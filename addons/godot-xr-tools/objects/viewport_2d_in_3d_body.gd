@@ -128,7 +128,7 @@ func _on_pointer_event(event : XRToolsPointerEvent) -> void:
 				_report_mouse_up( at)
 
 			XRToolsPointerEvent.Type.MOVED:
-				_report_mouse_move(pressed, last, at)
+				_report_mouse_move(false, last, at)
 
 	# Clear pointer information on exit
 	if type == XRToolsPointerEvent.Type.EXITED:
@@ -139,6 +139,7 @@ func _on_pointer_event(event : XRToolsPointerEvent) -> void:
 			_dominant = null
 		if pointer == _mouse:
 			_mouse = null
+		_report_mouse_move(pressed, last,  Vector2(0.0, 0.0))
 
 
 # Report touch-down event
