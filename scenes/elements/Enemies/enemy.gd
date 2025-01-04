@@ -21,6 +21,7 @@ var health:int:
 
 func _ready() -> void:
 	health = max_health
+	$AreaHitBox.damaged.connect(take_damage)
 	material = meshes[0].get_surface_override_material(0)
 	animation_player.animation_finished.connect(_animate_sprint)
 	_animate_sprint("")
@@ -41,6 +42,7 @@ func _process(delta: float) -> void:
 	progress += delta * speed
 	if progress_ratio == 1.0:
 		base.take_damage()
+		EventBus.send_enemy_impact_base()
 		queue_free()
 
 func take_damage(damage: int) -> void:

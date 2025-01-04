@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://qcjtm5gnkj02"]
+
+[ext_resource type="Texture2D" uid="uid://c3hjnnpexva42" path="res://assets/Enemies/Textures/goblin-dark-colormap.png" id="1_sunak"]
+
+[resource]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("1_sunak")
+texture_filter = 2
