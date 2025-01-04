@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tvcmall8iwc2"
-path.s3tc="res://.godot/imported/goblin-purple-colormap.png-fa7d3dbe31809700c12f567c2dcde080.s3tc.ctex"
-path.etc2="res://.godot/imported/goblin-purple-colormap.png-fa7d3dbe31809700c12f567c2dcde080.etc2.ctex"
+uid="uid://c3hjnnpexva42"
+path.s3tc="res://.godot/imported/goblin-dark-colormap.png-78db7f316c582c09876446f0216cf816.s3tc.ctex"
+path.etc2="res://.godot/imported/goblin-dark-colormap.png-78db7f316c582c09876446f0216cf816.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/Enemies/Textures/goblin-purple-colormap.png"
-dest_files=["res://.godot/imported/goblin-purple-colormap.png-fa7d3dbe31809700c12f567c2dcde080.s3tc.ctex", "res://.godot/imported/goblin-purple-colormap.png-fa7d3dbe31809700c12f567c2dcde080.etc2.ctex"]
+source_file="res://assets/Enemies/Textures/goblin-dark-colormap.png"
+dest_files=["res://.godot/imported/goblin-dark-colormap.png-78db7f316c582c09876446f0216cf816.s3tc.ctex", "res://.godot/imported/goblin-dark-colormap.png-78db7f316c582c09876446f0216cf816.etc2.ctex"]
 
 [params]
 

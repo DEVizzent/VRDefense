@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dtjr5qvysif7j"
 path.s3tc="res://.godot/imported/colormap.png-90aef01b395ca101283d48fde03c6dc0.s3tc.ctex"
+path.etc2="res://.godot/imported/colormap.png-90aef01b395ca101283d48fde03c6dc0.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/Enemies/Textures/colormap.png"
-dest_files=["res://.godot/imported/colormap.png-90aef01b395ca101283d48fde03c6dc0.s3tc.ctex"]
+dest_files=["res://.godot/imported/colormap.png-90aef01b395ca101283d48fde03c6dc0.s3tc.ctex", "res://.godot/imported/colormap.png-90aef01b395ca101283d48fde03c6dc0.etc2.ctex"]
 
 [params]
 

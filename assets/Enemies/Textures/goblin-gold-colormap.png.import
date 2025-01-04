@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpn72oa3jteeh"
 path.s3tc="res://.godot/imported/goblin-gold-colormap.png-e0dd3f77d866ba10911bef07b7cb97e2.s3tc.ctex"
+path.etc2="res://.godot/imported/goblin-gold-colormap.png-e0dd3f77d866ba10911bef07b7cb97e2.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/Enemies/Textures/goblin-gold-colormap.png"
-dest_files=["res://.godot/imported/goblin-gold-colormap.png-e0dd3f77d866ba10911bef07b7cb97e2.s3tc.ctex"]
+dest_files=["res://.godot/imported/goblin-gold-colormap.png-e0dd3f77d866ba10911bef07b7cb97e2.s3tc.ctex", "res://.godot/imported/goblin-gold-colormap.png-e0dd3f77d866ba10911bef07b7cb97e2.etc2.ctex"]
 
 [params]
 
