@@ -1,16 +1,17 @@
-[gd_scene load_steps=35 format=3 uid="uid://bs3144ct184g1"]
+[gd_scene load_steps=42 format=3 uid="uid://bs3144ct184g1"]
 
 [ext_resource type="MeshLibrary" uid="uid://bgknys2lv5gps" path="res://mesh_libraries/SpaceLibrary.tres" id="1_mxg50"]
 [ext_resource type="Script" path="res://nodes/xr_pointable_grid_map.gd" id="2_jbfaq"]
 [ext_resource type="PackedScene" uid="uid://br6uco4m0pijp" path="res://scenes/elements/base.tscn" id="3_hlvug"]
 [ext_resource type="Script" path="res://scenes/elements/enemies/spawner_path_3d.gd" id="4_cvs0n"]
-[ext_resource type="PackedScene" uid="uid://bdgeptrlnytvr" path="res://scenes/elements/enemies/enemy.tscn" id="5_1klvi"]
 [ext_resource type="Script" path="res://scenes/elements/waves/round.gd" id="6_gtm44"]
 [ext_resource type="Script" path="res://scenes/elements/waves/wave.gd" id="7_326r5"]
 [ext_resource type="Script" path="res://scenes/elements/waves/enemy_resource.gd" id="8_vk5w8"]
 [ext_resource type="Resource" uid="uid://ndrgb57thq8q" path="res://scenes/elements/enemies/goblin/resource/goblin_weak_resource.tres" id="9_cne07"]
 [ext_resource type="Resource" uid="uid://ck5ag5i07cd12" path="res://scenes/elements/enemies/goblin/resource/goblin_gold_resource.tres" id="10_er0gb"]
+[ext_resource type="Script" path="res://scenes/elements/waves/reward.gd" id="10_swv0p"]
 [ext_resource type="Resource" uid="uid://d2nb1qmiedb3r" path="res://scenes/elements/enemies/goblin/resource/goblin_resource.tres" id="11_spv3w"]
+[ext_resource type="Resource" uid="uid://ddur0fjmae8oj" path="res://scenes/elements/enemies/goblin/resource/goblin_dark_resource.tres" id="12_lb8ao"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ahee"]
 shading_mode = 2
@@ -51,6 +52,10 @@ rest_time = 1.0
 script = ExtResource("6_gtm44")
 waves = Array[ExtResource("7_326r5")]([SubResource("Resource_7rvnn"), SubResource("Resource_6jbba"), SubResource("Resource_svmjf"), SubResource("Resource_ai85g")])
 
+[sub_resource type="Resource" id="Resource_bsgtc"]
+script = ExtResource("10_swv0p")
+reward = 0
+
 [sub_resource type="Resource" id="Resource_fk28h"]
 script = ExtResource("7_326r5")
 duration = 8.0
@@ -78,6 +83,7 @@ rest_time = 1.0
 [sub_resource type="Resource" id="Resource_hoh65"]
 script = ExtResource("6_gtm44")
 waves = Array[ExtResource("7_326r5")]([SubResource("Resource_fk28h"), SubResource("Resource_u32po"), SubResource("Resource_miehj"), SubResource("Resource_em6cx")])
+reward = SubResource("Resource_bsgtc")
 
 [sub_resource type="Resource" id="Resource_3rkxs"]
 script = ExtResource("7_326r5")
@@ -122,7 +128,7 @@ rest_time = 5.0
 [sub_resource type="Resource" id="Resource_l0sl2"]
 script = ExtResource("7_326r5")
 duration = 10.0
-enemies = Array[ExtResource("8_vk5w8")]([ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07")])
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07"), ExtResource("9_cne07")])
 rest_time = 1.0
 
 [sub_resource type="Resource" id="Resource_cbm51"]
@@ -134,6 +140,34 @@ rest_time = 1.0
 [sub_resource type="Resource" id="Resource_yrm15"]
 script = ExtResource("6_gtm44")
 waves = Array[ExtResource("7_326r5")]([SubResource("Resource_1s608"), SubResource("Resource_7t7s3"), SubResource("Resource_l0sl2"), SubResource("Resource_cbm51")])
+
+[sub_resource type="Resource" id="Resource_iafta"]
+script = ExtResource("7_326r5")
+duration = 8.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("10_er0gb")])
+rest_time = 10.0
+
+[sub_resource type="Resource" id="Resource_du3cf"]
+script = ExtResource("7_326r5")
+duration = 5.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("10_er0gb")])
+rest_time = 10.0
+
+[sub_resource type="Resource" id="Resource_6og8l"]
+script = ExtResource("7_326r5")
+duration = 8.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w"), ExtResource("11_spv3w")])
+rest_time = 10.0
+
+[sub_resource type="Resource" id="Resource_va40y"]
+script = ExtResource("7_326r5")
+duration = 10.0
+enemies = Array[ExtResource("8_vk5w8")]([ExtResource("12_lb8ao"), ExtResource("12_lb8ao"), ExtResource("12_lb8ao"), ExtResource("12_lb8ao")])
+rest_time = 1.0
+
+[sub_resource type="Resource" id="Resource_2fny1"]
+script = ExtResource("6_gtm44")
+waves = Array[ExtResource("7_326r5")]([SubResource("Resource_iafta"), SubResource("Resource_du3cf"), SubResource("Resource_6og8l"), SubResource("Resource_va40y")])
 
 [sub_resource type="Environment" id="Environment_ollit"]
 background_mode = 1
@@ -164,8 +198,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 9.9493)
 [node name="SpawnerPath3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_o7ued")
 script = ExtResource("4_cvs0n")
-enemy_scene = ExtResource("5_1klvi")
-round_collection = Array[ExtResource("6_gtm44")]([SubResource("Resource_5swkb"), SubResource("Resource_hoh65"), SubResource("Resource_dmgw8"), SubResource("Resource_yrm15")])
+round_collection = Array[ExtResource("6_gtm44")]([SubResource("Resource_5swkb"), SubResource("Resource_hoh65"), SubResource("Resource_dmgw8"), SubResource("Resource_yrm15"), SubResource("Resource_2fny1")])
 
 [node name="Timer" type="Timer" parent="SpawnerPath3D"]
 wait_time = 3.0

@@ -1,0 +1,83 @@
+[gd_scene load_steps=17 format=3 uid="uid://hloba3kjwvgt"]
+
+[ext_resource type="MeshLibrary" uid="uid://bgknys2lv5gps" path="res://mesh_libraries/SpaceLibrary.tres" id="1_8qsc7"]
+[ext_resource type="Script" path="res://nodes/xr_pointable_grid_map.gd" id="2_2lraa"]
+[ext_resource type="PackedScene" uid="uid://br6uco4m0pijp" path="res://scenes/elements/base.tscn" id="3_gdipj"]
+[ext_resource type="Script" path="res://scenes/elements/enemies/spawner_path_3d.gd" id="4_3j8sg"]
+[ext_resource type="Script" path="res://scenes/elements/waves/round.gd" id="5_rm4ux"]
+[ext_resource type="Script" path="res://scenes/elements/waves/wave.gd" id="6_4h735"]
+[ext_resource type="Script" path="res://scenes/elements/waves/enemy_resource.gd" id="7_nycqf"]
+[ext_resource type="Resource" uid="uid://co7gxt5qy4bsp" path="res://scenes/elements/enemies/barrier/resource/barrier_goblin_weak.tres" id="8_lxlrj"]
+[ext_resource type="Resource" uid="uid://b08hutxgi0plw" path="res://scenes/elements/enemies/barrier/resource/barrier_goblin.tres" id="8_o2n07"]
+[ext_resource type="Resource" uid="uid://ddaoa15y0p0ll" path="res://scenes/elements/enemies/barrier/resource/barrier_goblin_dark.tres" id="10_52iid"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ahee"]
+shading_mode = 2
+albedo_color = Color(0.392157, 0.827451, 0.580392, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_o7ued"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 2.17437, 0, 19.9681, -0.995355, 0.00580215, 0.886474, 0.995355, -0.00580215, -0.886474, 2.28632, 0, 11.3897, -2.0775, -0.00813103, 0.965481, 2.0775, 0.00813103, -0.965481, 9.70706, 0, 10.1885, 1.99242, -0.00315094, -0.156808, -1.99242, 0.00315094, 0.156808, 9.76572, 0, -1.42145, 1.54392, -0.0134709, 0.226863, -1.54392, 0.0134709, -0.226863, -5.03335, 0, -2.29169, -0.447, 0, 0.24, 0.447, 0, -0.24, -5.474, 0, -9.872, -0.375, 0, 0.294, 0.375, 0, -0.294, 1.64879, 0, -10.8593, 0, 0, 0, 0, 0, 0, 1.99764, 0, -19.7657),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0.0213548, 0, 0)
+}
+point_count = 8
+
+[sub_resource type="Resource" id="Resource_phb6r"]
+script = ExtResource("6_4h735")
+duration = 15.0
+enemies = Array[ExtResource("7_nycqf")]([ExtResource("8_lxlrj"), ExtResource("8_o2n07"), ExtResource("10_52iid")])
+rest_time = 10.0
+
+[sub_resource type="Resource" id="Resource_1r35n"]
+script = ExtResource("6_4h735")
+duration = 8.0
+enemies = Array[ExtResource("7_nycqf")]([ExtResource("8_o2n07"), ExtResource("8_o2n07"), ExtResource("8_o2n07"), ExtResource("8_o2n07"), ExtResource("8_o2n07"), ExtResource("8_o2n07")])
+rest_time = 1.0
+
+[sub_resource type="Resource" id="Resource_2vtbp"]
+script = ExtResource("5_rm4ux")
+waves = Array[ExtResource("6_4h735")]([SubResource("Resource_phb6r"), SubResource("Resource_1r35n")])
+
+[sub_resource type="Environment" id="Environment_ollit"]
+background_mode = 1
+background_color = Color(0.716297, 0.716296, 0.716296, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.601223, 0.601223, 0.601223, 1)
+
+[node name="Map" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(100, 2, 100)
+material = SubResource("StandardMaterial3D_8ahee")
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_8qsc7")
+cell_size = Vector3(4, 4, 4)
+cell_center_y = false
+collision_layer = 1048577
+data = {
+"cells": PackedInt32Array(65535, 0, 0, 65535, 65535, 1048577, 1, 65535, 1048577, 1, 0, 0, 1, 1, 0, 1, 2, 1048577, 1, 3, 0, 65535, 1, 0, 65535, 2, 0, 1, 4, 0, 65534, 2, 0, 65535, 65534, 0, 1, 65534, 0, 1, 65533, 0, 65535, 65533, 1048577, 65535, 65532, 0, 0, 65532, 655361, 1, 65532, 0, 65534, 4, 0, 65535, 4, 0, 0, 4, 1, 0, 3, 1, 65535, 3, 0, 65534, 3, 0, 0, 2, 5, 0, 1, 0, 0, 0, 0, 0, 65535, 1048577, 0, 65534, 0, 0, 65533, 655365, 65534, 1, 0, 65534, 0, 0, 65534, 65535, 1048581, 65534, 65534, 655361, 65534, 65533, 5, 65534, 65532, 0, 65534, 65531, 0, 65535, 65531, 0, 0, 65531, 655361, 1, 65531, 0, 2, 65531, 0, 2, 65532, 0, 2, 65533, 0, 2, 65534, 0, 2, 65535, 1441797, 2, 0, 655361, 2, 1, 655361, 2, 2, 655365, 2, 3, 0, 2, 4, 0)
+}
+script = ExtResource("2_2lraa")
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Base" parent="." instance=ExtResource("3_gdipj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72924, 0, -19.8712)
+
+[node name="SpawnerPath3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_o7ued")
+script = ExtResource("4_3j8sg")
+round_collection = Array[ExtResource("5_rm4ux")]([SubResource("Resource_2vtbp")])
+
+[node name="Timer" type="Timer" parent="SpawnerPath3D"]
+wait_time = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, 1, -1, 4.37114e-08, -4.37114e-08, 0, 26, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ollit")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.5, 0.75, -0.433013, 0, 0.5, 0.866025, 0.866025, -0.433013, 0.25, 0, 4, 0)
