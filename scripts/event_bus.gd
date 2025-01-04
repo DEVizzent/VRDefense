@@ -2,6 +2,7 @@ extends Node
 class_name EventBusScript
 
 signal enemy_defeated(enemy: Enemy)
+signal enemy_impact_base()
 
 signal gears_updated(amount: int)
 
@@ -26,6 +27,9 @@ signal bomb_thrown()
 
 func send_enemy_defeated(enemy: Enemy) -> void:
 	enemy_defeated.emit(enemy)
+
+func send_enemy_impact_base() -> void:
+	enemy_impact_base.emit()
 
 func send_gears_updated(amount: int) -> void:
 	gears_updated.emit(amount)
