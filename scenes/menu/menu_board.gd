@@ -13,7 +13,7 @@ func _ready() -> void:
 func button_pressed(_button: Variant) -> void:
 	UISoundController.success()
 	var scene_base : XRToolsSceneBase = XRTools.find_xr_ancestor(self, "*", "XRToolsSceneBase")
-	scene_base.load_scene("res://scenes/levels/world1/level1/level.tscn")
+	scene_base.load_scene("res://scenes/levels/world1/level2/level.tscn")
 
 func tutorial_button_pressed(_button: Variant) -> void:
 	UISoundController.success()

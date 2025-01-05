@@ -2,21 +2,27 @@ extends PathFollow3D
 class_name Enemy
 
 @export var speed:int = 2
+var speed_backup:int = 2
 @export var max_health:int = 100
 @export var meshes: Array[MeshInstance3D]
 var reward_gears : int = 5
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 var material: StandardMaterial3D
 var impact_material: StandardMaterial3D = load("res://scenes/elements/enemies/goblin/goblin_material_unshaded.tres")
+var heal_material: StandardMaterial3D = load("res://scenes/elements/enemies/goblin/goblin_material_green_unshaded.tres")
 
 var health:int:
 	set(value):
+		var has_decreased := value < health
 		health = clamp(value, 0, max_health)
 		if health == 0:
 			animation_player.play("die")
 			EventBus.send_enemy_defeated(self)
 			return
-		animation_player.play("impact")
+		if has_decreased:
+			animation_player.play("impact")
+		else:
+			animation_player.play("heal")
 @onready var base : Node3D = get_tree().get_first_node_in_group("base")
 
 func _ready() -> void:
@@ -55,6 +61,17 @@ func show_impact_material() -> void:
 	for mesh in meshes:
 		mesh.set_surface_override_material(0, impact_material)
 
+func show_heal_material() -> void:
+	for mesh in meshes:
+		mesh.set_surface_override_material(0, heal_material)
+
 func show_regular_material() -> void:
 	for mesh in meshes:
 		mesh.set_surface_override_material(0, material)
+
+func movement_stop() -> void:
+	speed_backup = speed
+	speed = 0
+
+func movement_continue() -> void:
+	speed = speed_backup

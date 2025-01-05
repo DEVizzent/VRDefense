@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://bu0xigef7dydr"]
+[gd_scene load_steps=38 format=4 uid="uid://bu0xigef7dydr"]
 
 [ext_resource type="Script" path="res://scenes/elements/enemies/enemy.gd" id="1_u12g5"]
 [ext_resource type="Script" path="res://nodes/components/AreaHitBox.gd" id="2_gmhfp"]
@@ -2142,6 +2142,27 @@ tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = PackedFloat32Array(0, 1, 0, 0, 0, -1, 0.0333333, 1, -0.0817211, 0, 0, -0.996655, 0.1, 1, -0.427555, 0, 0, -0.903989, 0.133333, 1, -0.5, 0, 0, -0.866025, 0.166667, 1, -0.467004, 0, 0, -0.884255, 0.2, 1, -0.379779, 0, 0, -0.925077, 0.233333, 1, -0.256796, 0, 0, -0.966466, 0.266667, 1, -0.121176, 0, 0, -0.992631, 0.3, 1, -3.72529e-09, 0, 0, -1, 0.333333, 1, 0.121176, 0, 0, -0.992631, 0.366667, 1, 0.256795, 0, 0, -0.966466, 0.4, 1, 0.379779, 0, 0, -0.925077, 0.433333, 1, 0.467004, 0, 0, -0.884255, 0.466667, 1, 0.5, 0, 0, -0.866025, 0.5, 1, 0.452123, 0, 0, -0.891955, 0.533333, 1, 0.332819, 0, 0, -0.942991, 0.566667, 1, 0.183265, 0, 0, -0.983064, 0.6, 1, 0.0544273, 0, 0, -0.998518, 0.633333, 1, 0.0272237, 0, 0, -0.999629, 0.666667, 1, 0, 0, 0, -1)
 
+[sub_resource type="Animation" id="Animation_t1aki"]
+resource_name = "heal"
+length = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"show_heal_material"
+}, {
+"args": [],
+"method": &"show_regular_material"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_45o6q"]
 _data = {
 "RESET": SubResource("Animation_c0ekb"),
@@ -2155,6 +2176,7 @@ _data = {
 "emote-no": SubResource("Animation_cbptr"),
 "emote-yes": SubResource("Animation_d2ipw"),
 "fall": SubResource("Animation_gpueb"),
+"heal": SubResource("Animation_t1aki"),
 "holding-both": SubResource("Animation_7pjhc"),
 "holding-both-shoot": SubResource("Animation_vg5hr"),
 "holding-left": SubResource("Animation_uxnub"),

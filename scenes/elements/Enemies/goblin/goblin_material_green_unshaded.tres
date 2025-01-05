@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bpipcyx6k2rrr"]
+
+[resource]
+resource_name = "colormap"
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.40625, 1, 0, 1)
+texture_filter = 2

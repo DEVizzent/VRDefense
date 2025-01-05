@@ -1,7 +1,10 @@
-[gd_scene load_steps=36 format=4 uid="uid://cmr7d8ksyplu"]
+[gd_scene load_steps=42 format=4 uid="uid://cmr7d8ksyplu"]
 
-[ext_resource type="Script" path="res://scenes/elements/enemies/enemy.gd" id="1_l1qmn"]
+[ext_resource type="Script" path="res://scenes/elements/enemies/healer/enemy_healer.gd" id="1_yb2hw"]
 [ext_resource type="Texture2D" uid="uid://dtjr5qvysif7j" path="res://assets/Enemies/Textures/colormap.png" id="2_gs6ve"]
+[ext_resource type="Script" path="res://nodes/components/AreaHitBox.gd" id="2_ueiw1"]
+[ext_resource type="Script" path="res://nodes/components/AreaDamage.gd" id="4_4tt61"]
+[ext_resource type="PackedScene" uid="uid://cmtrtnsgru68w" path="res://scenes/vfx/heal_spell.tscn" id="4_dvqm1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uvqvs"]
 radius = 1.0
@@ -1474,6 +1477,23 @@ tracks/10/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 [sub_resource type="Animation" id="Animation_1qdmc"]
 resource_name = "impact"
 length = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"show_impact_material"
+}, {
+"args": [],
+"method": &"show_regular_material"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_prfea"]
 resource_name = "interact-left"
@@ -2123,6 +2143,153 @@ tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = PackedFloat32Array(0, 1, 0, 0, 0, -1, 0.0333333, 1, -0.0817211, 0, 0, -0.996655, 0.1, 1, -0.427555, 0, 0, -0.903989, 0.133333, 1, -0.5, 0, 0, -0.866025, 0.166667, 1, -0.467004, 0, 0, -0.884255, 0.2, 1, -0.379779, 0, 0, -0.925077, 0.233333, 1, -0.256796, 0, 0, -0.966466, 0.266667, 1, -0.121176, 0, 0, -0.992631, 0.3, 1, -3.72529e-09, 0, 0, -1, 0.333333, 1, 0.121176, 0, 0, -0.992631, 0.366667, 1, 0.256795, 0, 0, -0.966466, 0.4, 1, 0.379779, 0, 0, -0.925077, 0.433333, 1, 0.467004, 0, 0, -0.884255, 0.466667, 1, 0.5, 0, 0, -0.866025, 0.5, 1, 0.452123, 0, 0, -0.891955, 0.533333, 1, 0.332819, 0, 0, -0.942991, 0.566667, 1, 0.183265, 0, 0, -0.983064, 0.6, 1, 0.0544273, 0, 0, -0.998518, 0.633333, 1, 0.0272237, 0, 0, -0.999629, 0.666667, 1, 0, 0, 0, -1)
 
+[sub_resource type="Animation" id="Animation_jy3e3"]
+resource_name = "heal"
+length = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"show_heal_material"
+}, {
+"args": [],
+"method": &"show_regular_material"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_dmoiy"]
+resource_name = "heal_spell"
+length = 0.4
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("character-orc/Skeleton3D:torso")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -7.21911e-15, 0.705, -0.095, 0.2, 1, -7.21911e-15, 0.705, -0.095)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("character-orc/Skeleton3D:torso")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, -1, 0.0333333, 1, 0.0968109, 0, 0, -0.995303, 0.1, 1, 0.0968109, 0, 0, -0.995303, 0.133333, 1, 0.0545593, 0, 0, -0.998511, 0.166667, 1, 0.0272898, 0, 0, -0.999628, 0.2, 1, 0, 0, 0, -1, 0.233333, 1, 0.0968109, 0, 0, -0.995303, 0.3, 1, 0.0968109, 0, 0, -0.995303, 0.333333, 1, 0.0545593, 0, 0, -0.998511, 0.366667, 1, 0.0272898, 0, 0, -0.999628, 0.4, 1, 0, 0, 0, -1)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("character-orc/Skeleton3D:head")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, -1, 0.0333333, 1, -0.0968109, 0, 0, -0.995303, 0.1, 1, -0.0968109, 0, 0, -0.995303, 0.133333, 1, -0.0545593, 0, 0, -0.998511, 0.166667, 1, -0.0272898, 0, 0, -0.999628, 0.2, 1, 0, 0, 0, -1, 0.233333, 1, -0.0968109, 0, 0, -0.995303, 0.3, 1, -0.0968109, 0, 0, -0.995303, 0.333333, 1, -0.0545593, 0, 0, -0.998511, 0.366667, 1, -0.0272898, 0, 0, -0.999628, 0.4, 1, 0, 0, 0, -1)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("character-orc/Skeleton3D:arm-left")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0.382683, -0.92388, 0.2, 1, 0, 0, 0.382683, -0.92388)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("character-orc/Skeleton3D:arm-right")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, -0.5, 0, -0.866025, 0.0333333, 1, 0.0322984, -0.498956, 0.0559425, -0.864217, 0.1, 1, 0.0322984, -0.498956, 0.0559425, -0.864217, 0.133333, 1, 0.0181915, -0.499669, 0.0315085, -0.865452, 0.2, 1, 0, -0.5, 0, -0.866025, 0.233333, 1, 0.0322984, -0.498956, 0.0559425, -0.864217, 0.3, 1, 0.0322984, -0.498956, 0.0559425, -0.864217, 0.333333, 1, 0.0181915, -0.499669, 0.0315085, -0.865452, 0.4, 1, 0, -0.5, 0, -0.866025)
+tracks/5/type = "position_3d"
+tracks/5/imported = true
+tracks/5/enabled = true
+tracks/5/path = NodePath("character-orc/Skeleton3D:root")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.2, 1, 0, 0, 0)
+tracks/6/type = "rotation_3d"
+tracks/6/imported = true
+tracks/6/enabled = true
+tracks/6/path = NodePath("character-orc/Skeleton3D:root")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.2, 1, 0, 0, 0, 1)
+tracks/7/type = "position_3d"
+tracks/7/imported = true
+tracks/7/enabled = true
+tracks/7/path = NodePath("character-orc/Skeleton3D:leg-left")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, 0.334284, 0.705, -0.095, 0.2, 1, 0.334284, 0.705, -0.095)
+tracks/8/type = "rotation_3d"
+tracks/8/imported = true
+tracks/8/enabled = true
+tracks/8/path = NodePath("character-orc/Skeleton3D:leg-left")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.2, 1, 0, 0, 0, 1)
+tracks/9/type = "position_3d"
+tracks/9/imported = true
+tracks/9/enabled = true
+tracks/9/path = NodePath("character-orc/Skeleton3D:leg-right")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = PackedFloat32Array(0, 1, -0.334284, 0.705, -0.095, 0.2, 1, -0.334284, 0.705, -0.095)
+tracks/10/type = "rotation_3d"
+tracks/10/imported = true
+tracks/10/enabled = true
+tracks/10/path = NodePath("character-orc/Skeleton3D:leg-right")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.2, 1, 0, 0, 0, 1)
+tracks/11/type = "method"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("AreaHeal")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"generate_damage"
+}]
+}
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath(".")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"movement_stop"
+}, {
+"args": [],
+"method": &"movement_continue"
+}]
+}
+tracks/13/type = "method"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("VFX_Healt_Spell")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0.333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"emit"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_45o6q"]
 _data = {
 "RESET": SubResource("Animation_c0ekb"),
@@ -2136,6 +2303,8 @@ _data = {
 "emote-no": SubResource("Animation_cbptr"),
 "emote-yes": SubResource("Animation_d2ipw"),
 "fall": SubResource("Animation_gpueb"),
+"heal": SubResource("Animation_jy3e3"),
+"heal_spell": SubResource("Animation_dmoiy"),
 "holding-both": SubResource("Animation_7pjhc"),
 "holding-both-shoot": SubResource("Animation_vg5hr"),
 "holding-left": SubResource("Animation_uxnub"),
@@ -2154,18 +2323,21 @@ _data = {
 "walk": SubResource("Animation_ceu3n")
 }
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8nkhv"]
+radius = 8.0
+
 [node name="Enemy" type="PathFollow3D" node_paths=PackedStringArray("meshes")]
 loop = false
-script = ExtResource("1_l1qmn")
-max_health = 60
-meshes = [null, null]
+script = ExtResource("1_yb2hw")
+meshes = [NodePath("character-orc/Skeleton3D/body-mesh"), NodePath("character-orc/Skeleton3D/head-mesh")]
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="AreaHitBox" type="Area3D" parent="."]
 collision_layer = 32
 collision_mask = 0
 monitoring = false
+script = ExtResource("2_ueiw1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaHitBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CapsuleShape3D_uvqvs")
 
@@ -2199,28 +2371,28 @@ bones/3/parent = 0
 bones/3/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.21911e-15, 0.705, -0.095)
 bones/3/enabled = true
 bones/3/position = Vector3(-7.21911e-15, 0.705, -0.095)
-bones/3/rotation = Quaternion(0, 0, 0, 1)
+bones/3/rotation = Quaternion(-0.054559, 0, 0, 0.998511)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "arm-left"
 bones/4/parent = 3
 bones/4/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.399587, 0.446, 0.046)
 bones/4/enabled = true
 bones/4/position = Vector3(0.399587, 0.446, 0.046)
-bones/4/rotation = Quaternion(0, 0, 0, 1)
+bones/4/rotation = Quaternion(0, 0, -0.382683, 0.92388)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "arm-right"
 bones/5/parent = 3
 bones/5/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.399587, 0.446, 0.046)
 bones/5/enabled = true
 bones/5/position = Vector3(-0.399587, 0.446, 0.046)
-bones/5/rotation = Quaternion(0, 0, 0, 1)
+bones/5/rotation = Quaternion(-0.0181914, 0.499669, -0.0315083, 0.865452)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/name = "head"
 bones/6/parent = 3
 bones/6/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.27876e-09, 0.668, 0.105555)
 bones/6/enabled = true
 bones/6/position = Vector3(7.27876e-09, 0.668, 0.105555)
-bones/6/rotation = Quaternion(0, 0, 0, 1)
+bones/6/rotation = Quaternion(0.054559, 0, 0, 0.998511)
 bones/6/scale = Vector3(1, 1, 1)
 
 [node name="body-mesh" type="MeshInstance3D" parent="character-orc/Skeleton3D"]
@@ -2236,3 +2408,19 @@ libraries = {
 "": SubResource("AnimationLibrary_45o6q")
 }
 autoplay = "sprint"
+
+[node name="HealTimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="VFX_Healt_Spell" parent="." instance=ExtResource("4_dvqm1")]
+
+[node name="AreaHeal" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("4_4tt61")
+damage = -40.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaHeal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_8nkhv")

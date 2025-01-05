@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://hloba3kjwvgt"]
+[gd_scene load_steps=18 format=3 uid="uid://hloba3kjwvgt"]
 
 [ext_resource type="MeshLibrary" uid="uid://bgknys2lv5gps" path="res://mesh_libraries/SpaceLibrary.tres" id="1_8qsc7"]
 [ext_resource type="Script" path="res://nodes/xr_pointable_grid_map.gd" id="2_2lraa"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scenes/elements/waves/enemy_resource.gd" id="7_nycqf"]
 [ext_resource type="Resource" uid="uid://co7gxt5qy4bsp" path="res://scenes/elements/enemies/barrier/resource/barrier_goblin_weak.tres" id="8_lxlrj"]
 [ext_resource type="Resource" uid="uid://b08hutxgi0plw" path="res://scenes/elements/enemies/barrier/resource/barrier_goblin.tres" id="8_o2n07"]
+[ext_resource type="Resource" uid="uid://dkc8cbtwe05p" path="res://scenes/elements/enemies/healer/resource/healer.tres" id="9_vkb4n"]
 [ext_resource type="Resource" uid="uid://ddaoa15y0p0ll" path="res://scenes/elements/enemies/barrier/resource/barrier_goblin_dark.tres" id="10_52iid"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ahee"]
@@ -24,9 +25,9 @@ point_count = 8
 
 [sub_resource type="Resource" id="Resource_phb6r"]
 script = ExtResource("6_4h735")
-duration = 15.0
-enemies = Array[ExtResource("7_nycqf")]([ExtResource("8_lxlrj"), ExtResource("8_o2n07"), ExtResource("10_52iid")])
-rest_time = 10.0
+duration = 5.205
+enemies = Array[ExtResource("7_nycqf")]([ExtResource("8_lxlrj"), ExtResource("9_vkb4n"), ExtResource("10_52iid")])
+rest_time = 17.317
 
 [sub_resource type="Resource" id="Resource_1r35n"]
 script = ExtResource("6_4h735")

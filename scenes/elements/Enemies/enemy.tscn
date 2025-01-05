@@ -1,7 +1,8 @@
-[gd_scene load_steps=36 format=4 uid="uid://bdgeptrlnytvr"]
+[gd_scene load_steps=37 format=4 uid="uid://bdgeptrlnytvr"]
 
 [ext_resource type="Script" path="res://scenes/elements/enemies/enemy.gd" id="1_4kqo0"]
 [ext_resource type="Material" uid="uid://cbqprs4eljqhi" path="res://scenes/elements/enemies/goblin/goblin_material_unshaded.tres" id="2_en8ye"]
+[ext_resource type="Script" path="res://nodes/components/AreaHitBox.gd" id="2_pq3hu"]
 [ext_resource type="Material" uid="uid://snt3j30p2qss" path="res://scenes/elements/enemies/goblin/goblin_material.tres" id="2_y3i1o"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uvqvs"]
@@ -2227,12 +2228,13 @@ script = ExtResource("1_4kqo0")
 max_health = 60
 meshes = [NodePath("character-orc/Skeleton3D/body-mesh"), NodePath("character-orc/Skeleton3D/head-mesh")]
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="AreaHitBox" type="Area3D" parent="."]
 collision_layer = 32
 collision_mask = 0
 monitoring = false
+script = ExtResource("2_pq3hu")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaHitBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CapsuleShape3D_uvqvs")
 

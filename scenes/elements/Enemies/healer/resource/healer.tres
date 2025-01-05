@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=5 format=3 uid="uid://dkc8cbtwe05p"]
+
+[ext_resource type="Script" path="res://scenes/elements/waves/enemy_stats.gd" id="1_ayylf"]
+[ext_resource type="Script" path="res://scenes/elements/waves/enemy_resource.gd" id="1_j1hm6"]
+[ext_resource type="PackedScene" uid="uid://cmr7d8ksyplu" path="res://scenes/elements/enemies/healer/healer.tscn" id="2_ex3hq"]
+
+[sub_resource type="Resource" id="Resource_614jo"]
+script = ExtResource("1_ayylf")
+health = 50
+speed = 2.5
+reward_gears = 10
+
+[resource]
+script = ExtResource("1_j1hm6")
+scene = ExtResource("2_ex3hq")
+enemy_stats = SubResource("Resource_614jo")

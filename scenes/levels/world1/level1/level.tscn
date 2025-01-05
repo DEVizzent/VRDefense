@@ -34,6 +34,7 @@ collision_layer = 0
 viewport_size = Vector2(1200, 600)
 throttle_fps = 1.0
 input_keyboard = false
+scene_properties_keys = PackedStringArray()
 
 [node name="FunctionPointer" parent="XROrigin3D/LeftHand" index="0" instance=ExtResource("4_fpaw2")]
 enabled = false
